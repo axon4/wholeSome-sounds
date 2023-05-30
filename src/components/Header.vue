@@ -5,7 +5,7 @@
 			<div class='flex flex-grow items-center'>
 				<ul class='flex flex-row mt-1'>
 					<li>
-						<a href='#' class='px-2 text-white'>Log In / Register</a>
+						<a href='#' class='px-2 text-white' @click.prevent='toggleAuthenticationModal'>Log In / Register</a>
 					</li>
 					<li>
 						<a href='#' class='px-2 text-white'>Manage</a>
@@ -15,3 +15,20 @@
 		</nav>
 	</header>
 </template>
+
+<script>
+	import { mapStores } from 'pinia';
+	import useAuthenticationModalStore from '@/stores/authenticationModal';
+
+	export default {
+		name: 'Header',
+		computed: {
+			...mapStores(useAuthenticationModalStore)
+		},
+		methods: {
+			toggleAuthenticationModal() {					
+				this.authenticationModalStore.isOpen = true;
+			}
+		}
+	}
+</script>
