@@ -17,13 +17,27 @@
 					</div>
 					<ul class='flex flex-wrap mb-4'>
 						<li class='flex-auto text-center'>
-							<a href='#' class='block rounded py-3 px-4 transition hover:text-white text-white bg-blue-600'>Log In</a>
+							<a
+								href='#'
+								class='block rounded py-3 px-4 transition'
+								:class='{"hover:text-white text-white bg-blue-600": tab === "logIn", "hover:text-blue-600": tab === "registration"}'
+								@click.prevent='tab = "logIn"'
+							>
+								Log In
+							</a>
 						</li>
 						<li class='flex-auto text-center'>
-							<a href='#' class='block rounded py-3 px-4 transition'>Register</a>
+							<a
+								href='#'
+								class='block rounded py-3 px-4 transition'
+								:class='{"hover:text-white text-white bg-blue-600": tab === "registration", "hover:text-blue-600": tab === "logIn"}'
+								@click.prevent='tab = "registration"'
+							>
+								Register
+							</a>
 						</li>
 					</ul>
-					<form>
+					<form v-show='tab === "logIn"'>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>EMail</label>
 							<input type='email' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
@@ -36,7 +50,7 @@
 							Submit
 						</button>
 					</form>
-					<form>
+					<form v-show='tab === "registration"'>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Name</label>
 							<input type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Name' />
@@ -47,11 +61,11 @@
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Age</label>
-							<input type='number' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' />
+							<input type='number' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Age' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>PassWord</label>
-							<input type='password' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Password' />
+							<input type='password' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='PassWord' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Confirm PassWord</label>
@@ -85,6 +99,9 @@
 
 	export default {
 		name: 'AuthenticationModal',
+		data() {
+			return {tab: 'logIn'};
+		},
 		computed: {
 			...mapState(useAuthenticationModalStore, ['hiddenClass']),
 			...mapWritableState(useAuthenticationModalStore, {modalVisibility: 'isOpen'})
