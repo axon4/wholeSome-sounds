@@ -50,39 +50,46 @@
 							Submit
 						</button>
 					</VeeForm>
-					<VeeForm :validation-schema='schema' v-show='tab === "registration"'>
+					<VeeForm :validation-schema='schema' @submit='register' v-show='tab === "registration"'>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Name</label>
 							<VeeField type='text' name='name' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Name' />
-                            <ErrorMessage name='name' class='text-red-600' />
+							<ErrorMessage name='name' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>EMail</label>
 							<VeeField type='email' name='eMail' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
+							<ErrorMessage name='eMail' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Age</label>
 							<VeeField type='number' name='age' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Age' />
+							<ErrorMessage name='age' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>PassWord</label>
 							<VeeField type='password' name='passWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='PassWord' />
+							<ErrorMessage name='passWord' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Confirm PassWord</label>
 							<VeeField type='password' name='confirmPassWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Confirm PassWord' />
+							<ErrorMessage name='confirmPassWord' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Country</label>
-							<select class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded'>
-								<option value='United Kingdom'>United Kingdom</option>
+							<VeeField as='select' name='country' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded'>
 								<option value='Saudi Arabia'>Saudi Arabia</option>
 								<option value='United Arab Emirates'>United Arab Emirates</option>
-							</select>
+								<option value='United Kingdom'>United Kingdom</option>
+								<option value='Tartary'>Tartary</option>
+							</VeeField>
+							<ErrorMessage name='country' class='text-red-600' />
 						</div>
 						<div class='mb-3 pl-6'>
-							<VeeField type='checkbox' name='termsAndConditions' class='w-4 h-4 float-left -ml-6 mt-1 rounded' />
+							<VeeField type='checkbox' name='termsAndConditions' value='1' class='w-4 h-4 float-left -ml-6 mt-1 rounded' />
 							<label class='inline-block'>Accept the Terms and Conditions</label>
+							<ErrorMessage name='termsAndConditions' class='text-red-600 block' />
 						</div>
 						<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700'>
 							Submit
@@ -102,15 +109,26 @@
 		name: 'AuthenticationModal',
 		data() {
 			return {
-                tab: 'logIn',
-                schema: {
-                    name: 'required|min:2|max:72|alpha_spaces'
-                }
-            };
+				tab: 'logIn',
+				schema: {
+					name: 'required|min:2|max:72|alpha_spaces',
+					eMail: 'required|min:5|max:76|eMail',
+					age: 'required|min_value:9|max_value:70',
+					passWord: 'required|min:7|max:96',
+					confirmPassWord: 'required|confirmed:@passWord',
+					country: 'required|not_one_of:Tartary',
+					termsAndConditions: 'required'
+				}
+			};
 		},
 		computed: {
 			...mapState(useAuthenticationModalStore, ['hiddenClass']),
 			...mapWritableState(useAuthenticationModalStore, {modalVisibility: 'isOpen'})
+		},
+		methods: {
+			register(values) {
+				console.log(values)
+			}
 		}
 	}
 </script>
