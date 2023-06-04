@@ -37,39 +37,40 @@
 							</a>
 						</li>
 					</ul>
-					<form v-show='tab === "logIn"'>
+					<VeeForm v-show='tab === "logIn"'>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>EMail</label>
-							<input type='email' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
+							<VeeField type='email' name='eMail' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>PassWord</label>
-							<input type='password' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Password' />
+							<VeeField type='password' name='passWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Password' />
 						</div>
 						<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700'>
 							Submit
 						</button>
-					</form>
-					<form v-show='tab === "registration"'>
+					</VeeForm>
+					<VeeForm :validation-schema='schema' v-show='tab === "registration"'>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Name</label>
-							<input type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Name' />
+							<VeeField type='text' name='name' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Name' />
+                            <ErrorMessage name='name' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>EMail</label>
-							<input type='email' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
+							<VeeField type='email' name='eMail' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Age</label>
-							<input type='number' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Age' />
+							<VeeField type='number' name='age' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Age' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>PassWord</label>
-							<input type='password' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='PassWord' />
+							<VeeField type='password' name='passWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='PassWord' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Confirm PassWord</label>
-							<input type='password' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Confirm PassWord' />
+							<VeeField type='password' name='confirmPassWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Confirm PassWord' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Country</label>
@@ -80,13 +81,13 @@
 							</select>
 						</div>
 						<div class='mb-3 pl-6'>
-							<input type='checkbox' class='w-4 h-4 float-left -ml-6 mt-1 rounded' />
+							<VeeField type='checkbox' name='termsAndConditions' class='w-4 h-4 float-left -ml-6 mt-1 rounded' />
 							<label class='inline-block'>Accept the Terms and Conditions</label>
 						</div>
 						<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700'>
 							Submit
 						</button>
-					</form>
+					</VeeForm>
 				</div>
 			</div>
 		</div>
@@ -100,7 +101,12 @@
 	export default {
 		name: 'AuthenticationModal',
 		data() {
-			return {tab: 'logIn'};
+			return {
+                tab: 'logIn',
+                schema: {
+                    name: 'required|min:2|max:72|alpha_spaces'
+                }
+            };
 		},
 		computed: {
 			...mapState(useAuthenticationModalStore, ['hiddenClass']),
