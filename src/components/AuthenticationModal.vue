@@ -68,8 +68,10 @@
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>PassWord</label>
-							<VeeField type='password' name='passWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='PassWord' />
-							<ErrorMessage name='passWord' class='text-red-600' />
+							<VeeField name='passWord' :bails='false' v-slot='{ field, errors }'>
+								<input type='password' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='PassWord' v-bind='field' />
+								<span class='block text-red-600' v-for='error in errors' :key='error'>{{ error }}</span>
+							</VeeField>
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Confirm PassWord</label>
@@ -114,7 +116,7 @@
 					name: 'required|min:2|max:72|alpha_spaces',
 					eMail: 'required|min:5|max:76|eMail',
 					age: 'required|min_value:9|max_value:70',
-					passWord: 'required|min:7|max:96',
+					passWord: 'required|min:7|max:96|not_one_of:1',
 					confirmPassWord: 'required|confirmed:@passWord',
 					country: 'required|not_one_of:Tartary',
 					termsAndConditions: 'required'
