@@ -3,8 +3,8 @@ import { alpha_spaces, confirmed, email, max, max_value, min, min_value, not_one
 
 const VeeValidatePlugIn = {
 	install(application) {
-		application.component('VeeField', Field);
-		application.component('VeeForm', Form);
+		application.component('Field', Field);
+		application.component('Form', Form);
 		application.component('ErrorMessage', ErrorMessage);
 
 		defineRule('required', required);

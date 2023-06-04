@@ -37,69 +37,69 @@
 							</a>
 						</li>
 					</ul>
-					<VeeForm v-show='tab === "logIn"'>
+					<Form v-show='tab === "logIn"'>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>EMail</label>
-							<VeeField type='email' name='eMail' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
+							<Field type='email' name='eMail' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>PassWord</label>
-							<VeeField type='password' name='passWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Password' />
+							<Field type='password' name='passWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Password' />
 						</div>
 						<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700'>
 							Submit
 						</button>
-					</VeeForm>
+					</Form>
 					<div class='text-white text-center font-bold p-4 rounded mb-4' :class='registrationBannerVariant' v-if='showRegistrationBanner'>
 						{{ registrationBannerMessage }}
 					</div>
-					<VeeForm :validation-schema='schema' :initial-values='defaults' @submit='register' v-show='tab === "registration"'>
+					<Form :validation-schema='schema' :initial-values='defaults' @submit='register' v-show='tab === "registration"'>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Name</label>
-							<VeeField type='text' name='name' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Name' />
+							<Field type='text' name='name' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Name' />
 							<ErrorMessage name='name' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>EMail</label>
-							<VeeField type='email' name='eMail' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
+							<Field type='email' name='eMail' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='EMail' />
 							<ErrorMessage name='eMail' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Age</label>
-							<VeeField type='number' name='age' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Age' />
+							<Field type='number' name='age' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Age' />
 							<ErrorMessage name='age' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>PassWord</label>
-							<VeeField name='passWord' :bails='false' v-slot='{ field, errors }'>
+							<Field name='passWord' :bails='false' v-slot='{ field, errors }'>
 								<input type='password' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='PassWord' v-bind='field' />
 								<span class='block text-red-600' v-for='error in errors' :key='error'>{{ error }}</span>
-							</VeeField>
+							</Field>
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Confirm PassWord</label>
-							<VeeField type='password' name='confirmPassWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Confirm PassWord' />
+							<Field type='password' name='confirmPassWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Confirm PassWord' />
 							<ErrorMessage name='confirmPassWord' class='text-red-600' />
 						</div>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Country</label>
-							<VeeField as='select' name='country' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded'>
+							<Field as='select' name='country' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded'>
 								<option value='Saudi Arabia'>Saudi Arabia</option>
 								<option value='United Arab Emirates'>United Arab Emirates</option>
 								<option value='United Kingdom'>United Kingdom</option>
 								<option value='Tartary'>Tartary</option>
-							</VeeField>
+							</Field>
 							<ErrorMessage name='country' class='text-red-600' />
 						</div>
 						<div class='mb-3 pl-6'>
-							<VeeField type='checkbox' name='termsAndConditions' value='1' class='w-4 h-4 float-left -ml-6 mt-1 rounded' />
+							<Field type='checkbox' name='termsAndConditions' value='1' class='w-4 h-4 float-left -ml-6 mt-1 rounded' />
 							<label class='inline-block'>Accept the Terms and Conditions</label>
 							<ErrorMessage name='termsAndConditions' class='text-red-600 block' />
 						</div>
 						<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700' :disabled='registrationPending'>
 							Submit
 						</button>
-					</VeeForm>
+					</Form>
 				</div>
 			</div>
 		</div>
