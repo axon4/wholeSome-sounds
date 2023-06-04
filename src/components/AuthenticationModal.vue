@@ -50,7 +50,7 @@
 							Submit
 						</button>
 					</VeeForm>
-					<VeeForm :validation-schema='schema' @submit='register' v-show='tab === "registration"'>
+					<VeeForm :validation-schema='schema' :initial-values='defaults' @submit='register' v-show='tab === "registration"'>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Name</label>
 							<VeeField type='text' name='name' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Name' />
@@ -120,6 +120,9 @@
 					confirmPassWord: 'required|confirmed:@passWord',
 					country: 'required|not_one_of:Tartary',
 					termsAndConditions: 'required'
+				},
+				defaults: {
+					country: 'United Kingdom'
 				}
 			};
 		},
