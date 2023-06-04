@@ -1,4 +1,7 @@
 <template>
+	<div class='text-white text-center font-bold p-4 rounded mb-4' :class='bannerVariant' v-show='showBanner'>
+		{{ bannerMessage }}
+	</div>
 	<Form :validation-schema='schema' @submit='submit'>
 		<div class='mb-3'>
 			<label class='inline-block mb-2'>EMail</label>
@@ -10,7 +13,7 @@
 			<Field type='password' name='passWord' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='Password' />
 			<ErrorMessage name='passWord' class='text-red-600' />
 		</div>
-		<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700'>
+		<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700' :disabled='pending'>
 			Submit
 		</button>
 	</Form>
@@ -24,11 +27,25 @@
 				schema: {
 					eMail: 'required|min:5|max:76|eMail',
 					passWord: 'required|min:7|max:96'
-				}
+				},
+				pending: false,
+				showBanner: false,
+				bannerVariant: 'bg-blue-500',
+				bannerMessage: 'Log In in Progress'
 			}
 		},
 		methods: {
 			submit(values) {
+				this.showBanner = true;
+				this.pending = true;
+				this.bannerVariant = 'bg-blue-500';
+				this.bannerMessage = 'Log In in Progress';
+
+				setTimeout(() => {
+					this.bannerVariant = 'bg-green-500';
+					this.bannerMessage = 'Log In Successful';
+				}, 3000);
+
 				console.log(values);
 			}
 		}

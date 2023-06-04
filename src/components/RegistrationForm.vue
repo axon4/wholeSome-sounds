@@ -1,5 +1,5 @@
 <template>
-	<div class='text-white text-center font-bold p-4 rounded mb-4' :class='bannerVariant' v-if='showBanner'>
+	<div class='text-white text-center font-bold p-4 rounded mb-4' :class='bannerVariant' v-show='showBanner'>
 		{{ bannerMessage }}
 	</div>
 	<Form :validation-schema='schema' :initial-values='defaults' @submit='submit'>
