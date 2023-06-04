@@ -117,9 +117,9 @@
 					eMail: 'required|min:5|max:76|eMail',
 					age: 'required|min_value:9|max_value:70',
 					passWord: 'required|min:7|max:96|not_one_of:1',
-					confirmPassWord: 'required|confirmed:@passWord',
+					confirmPassWord: 'confirmed:@passWord',
 					country: 'required|not_one_of:Tartary',
-					termsAndConditions: 'required'
+					termsAndConditions: 'termsAndConditions'
 				},
 				defaults: {
 					country: 'United Kingdom'
