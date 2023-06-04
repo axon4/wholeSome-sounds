@@ -50,6 +50,9 @@
 							Submit
 						</button>
 					</VeeForm>
+					<div class='text-white text-center font-bold p-4 rounded mb-4' :class='registrationBannerVariant' v-if='showRegistrationBanner'>
+						{{ registrationBannerMessage }}
+					</div>
 					<VeeForm :validation-schema='schema' :initial-values='defaults' @submit='register' v-show='tab === "registration"'>
 						<div class='mb-3'>
 							<label class='inline-block mb-2'>Name</label>
@@ -93,7 +96,7 @@
 							<label class='inline-block'>Accept the Terms and Conditions</label>
 							<ErrorMessage name='termsAndConditions' class='text-red-600 block' />
 						</div>
-						<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700'>
+						<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700' :disabled='registrationPending'>
 							Submit
 						</button>
 					</VeeForm>
@@ -123,7 +126,11 @@
 				},
 				defaults: {
 					country: 'United Kingdom'
-				}
+				},
+				registrationPending: false,
+				showRegistrationBanner: false,
+				registrationBannerVariant: 'bg-blue-500',
+				registrationBannerMessage: 'Registration in Progress'
 			};
 		},
 		computed: {
@@ -132,8 +139,18 @@
 		},
 		methods: {
 			register(values) {
-				console.log(values)
+				this.showRegistrationBanner = true;
+				this.registrationPending = true;
+				this.registrationBannerVariant = 'bg-blue-500';
+				this.registrationBannerMessage = 'Registration in Progress';
+
+				setTimeout(() => {
+					this.registrationBannerVariant = 'bg-green-500';
+					this.registrationBannerMessage = 'Registration Successful';
+				}, 3000);
+
+				console.log(values);
 			}
 		}
-	}
+	};
 </script>
