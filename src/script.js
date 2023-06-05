@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 import Application from './Application.vue';
 import router from './router';
 import VeeValidatePlugIn from './includes/veeValidate';
+import './includes/fireBase';
 import './style/tailWind.css';
 import './style/style.css';
 
