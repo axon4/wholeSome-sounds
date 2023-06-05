@@ -52,7 +52,7 @@
 </template>
 
 <script>
-	import { authentication } from '@/includes/fireBase';
+	import { authentication, usersCollection } from '@/includes/fireBase';
 
 	export default {
 		name: 'RegistrationForm',
@@ -77,7 +77,7 @@
 			}
 		},
 		methods: {
-			async submit(values) {
+			async submit({ name, age, eMail, passWord, country }) {
 				this.showBanner = true;
 				this.pending = true;
 				this.bannerVariant = 'bg-blue-500';
@@ -86,7 +86,8 @@
 				let user;
 
 				try {
-					user = await authentication.createUserWithEmailAndPassword(values.eMail, values.passWord);
+					user = await authentication.createUserWithEmailAndPassword(eMail, passWord);
+					await usersCollection.add({ name, age, eMail, country });
 				} catch (error) {
 					this.pending = false;
 					this.bannerVariant = 'bg-red-500';
