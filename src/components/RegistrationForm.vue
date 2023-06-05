@@ -52,7 +52,7 @@
 </template>
 
 <script>
-	import fireBase from '@/includes/fireBase';
+	import { authentication } from '@/includes/fireBase';
 
 	export default {
 		name: 'RegistrationForm',
@@ -86,7 +86,7 @@
 				let user;
 
 				try {
-					user = await fireBase.auth().createUserWithEmailAndPassword(values.eMail, values.passWord);
+					user = await authentication.createUserWithEmailAndPassword(values.eMail, values.passWord);
 				} catch (error) {
 					this.pending = false;
 					this.bannerVariant = 'bg-red-500';
