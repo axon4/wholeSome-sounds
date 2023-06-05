@@ -52,6 +52,8 @@
 </template>
 
 <script>
+	import fireBase from '@/includes/fireBase';
+
 	export default {
 		name: 'RegistrationForm',
 		data() {
@@ -75,18 +77,28 @@
 			}
 		},
 		methods: {
-			submit(values) {
+			async submit(values) {
 				this.showBanner = true;
 				this.pending = true;
 				this.bannerVariant = 'bg-blue-500';
 				this.bannerMessage = 'Registration in Progress';
 
-				setTimeout(() => {
-					this.bannerVariant = 'bg-green-500';
-					this.bannerMessage = 'Registration Successful';
-				}, 3000);
+				let user;
 
-				console.log(values);
+				try {
+					user = await fireBase.auth().createUserWithEmailAndPassword(values.eMail, values.passWord);
+				} catch (error) {
+					this.pending = false;
+					this.bannerVariant = 'bg-red-500';
+					this.bannerMessage = 'Error Registering';
+
+					return;
+				};
+
+				this.bannerVariant = 'bg-green-500';
+				this.bannerMessage = 'Registration Successful';
+
+				console.log(user);
 			}
 		}
 	};
