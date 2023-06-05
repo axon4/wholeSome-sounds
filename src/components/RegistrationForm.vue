@@ -52,9 +52,8 @@
 </template>
 
 <script>
-	import { mapWritableState } from 'pinia';
+	import { mapActions } from 'pinia';
 	import useUserStore from '@/stores/user';
-	import { authentication, usersCollection } from '@/includes/fireBase';
 
 	export default {
 		name: 'RegistrationForm',
@@ -78,23 +77,17 @@
 				bannerMessage: 'Registration in Progress'
 			}
 		},
-		computed: {
-			...mapWritableState(useUserStore, 'loggedIn')
-		},
 		methods: {
-			async submit({ name, age, eMail, passWord, country }) {
+			...mapActions(useUserStore, {register: 'createUser'}),
+			async submit(values) {
 				this.showBanner = true;
 				this.pending = true;
 				this.bannerVariant = 'bg-blue-500';
 				this.bannerMessage = 'Registration in Progress';
 
-				let user;
-
 				try {
-					user = await authentication.createUserWithEmailAndPassword(eMail, passWord);
-					await usersCollection.add({ name, age, eMail, country });
+					await this.register(values);
 
-					this.loggedIn = true;
 					this.bannerVariant = 'bg-green-500';
 					this.bannerMessage = 'Registration Successful';
 				} catch (error) {
@@ -104,8 +97,6 @@
 
 					return;
 				};
-
-				console.log(user);
 			}
 		}
 	};
