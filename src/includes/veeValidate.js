@@ -1,5 +1,5 @@
 import { configure, defineRule, ErrorMessage, Field, Form } from 'vee-validate';
-import { alpha_spaces, confirmed, email, max, max_value, min, min_value, not_one_of, required } from '@vee-validate/rules';
+import { alpha_dash, confirmed, email, max, max_value, min, min_value, not_one_of, required } from '@vee-validate/rules';
 
 const VeeValidatePlugIn = {
 	install(application) {
@@ -11,7 +11,7 @@ const VeeValidatePlugIn = {
 		defineRule('termsAndConditions', required);
 		defineRule('min', min);
 		defineRule('max', max);
-		defineRule('alpha_spaces', alpha_spaces);
+		defineRule('alpha_dash', alpha_dash);
 		defineRule('eMail', email);
 		defineRule('min_value', min_value);
 		defineRule('max_value', max_value);
@@ -24,7 +24,7 @@ const VeeValidatePlugIn = {
 					required: `'${context.field}' is required`,
 					min: `'${context.field}' is too short`,
 					max: `'${context.field}' is too long`,
-					alpha_spaces: `'${context.field}' may only contain alphanumeric characters and spaces`,
+					alpha_dash: `'${context.field}' may only contain alphanumerics/dashes/underscores`,
 					eMail: `'${context.field}' is an invalid eMail`,
 					min_value: `'${context.field}' is too low`,
                     max_value: `'${context.field}' is too high`,

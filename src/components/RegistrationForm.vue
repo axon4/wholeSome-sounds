@@ -60,7 +60,7 @@
 		data() {
 			return {
 				schema: {
-					name: 'required|min:2|max:72|alpha_spaces',
+					name: 'required|min:2|max:72|alpha_dash',
 					eMail: 'required|min:5|max:76|eMail',
 					age: 'required|min_value:9|max_value:70',
 					passWord: 'required|min:7|max:96',
