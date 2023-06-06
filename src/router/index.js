@@ -11,7 +11,13 @@ const routes = [
 	{
 		name: 'manage',
 		path: '/manage',
+		// alias: '/management',
 		component: Manage
+	},
+	{
+		name: 'catchAll',
+		path: '/:catchAll(.*)*',
+		redirect: {name: 'home'}
 	}
 ];
 
