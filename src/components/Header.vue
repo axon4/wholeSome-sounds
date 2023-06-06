@@ -1,7 +1,7 @@
 <template>
 	<header id='header' class='bg-gray-700'>
 		<nav class='container mx-auto flex justify-between items-center py-5 px-4'>
-			<RouterLink to='/' class='text-white font-bold uppercase text-2xl mr-4'>WholeSome Sounds</RouterLink>
+			<RouterLink to='/' class='text-white font-bold uppercase text-2xl mr-4' exact-active-class='inActive'>WholeSome Sounds</RouterLink>
 			<div class='flex items-center'>
 				<ul class='flex flex-row mt-1'>
 					<template v-if='userStore.loggedIn'>
