@@ -20,6 +20,9 @@
 </template>
 
 <script>
+	import { mapActions } from 'pinia';
+	import useUserStore from '@/stores/user';
+
 	export default {
 		name: 'LogInForm',
 		data() {
@@ -35,18 +38,25 @@
 			}
 		},
 		methods: {
-			submit(values) {
+			...mapActions(useUserStore, ['logIn']),
+			async submit(values) {
 				this.showBanner = true;
 				this.pending = true;
 				this.bannerVariant = 'bg-blue-500';
 				this.bannerMessage = 'Log In in Progress';
-
-				setTimeout(() => {
+				
+				try {
+					await this.logIn(values);
+					
 					this.bannerVariant = 'bg-green-500';
 					this.bannerMessage = 'Log In Successful';
-				}, 3000);
+				} catch (error) {
+					this.pending = false;
+					this.bannerVariant = 'bg-red-500';
+					this.bannerMessage = 'Error Logging In';
 
-				console.log(values);
+					return;	
+				};
 			}
 		}
 	};

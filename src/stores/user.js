@@ -12,6 +12,11 @@ const useUserStore = defineStore('user', {
 			await userCredential.user.updateProfile({displayName: name});
 
 			this.loggedIn = true;
+		},
+		async logIn({ eMail, passWord }) {
+			await authentication.signInWithEmailAndPassword(eMail, passWord);
+			
+			this.loggedIn = true;
 		}
 	}
 });
