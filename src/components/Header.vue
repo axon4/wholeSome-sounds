@@ -1,8 +1,8 @@
 <template>
 	<header id='header' class='bg-gray-700'>
-		<nav class='container mx-auto flex justify-start items-center py-5 px-4'>
+		<nav class='container mx-auto flex justify-between items-center py-5 px-4'>
 			<a href='#' class='text-white font-bold uppercase text-2xl mr-4'>WholeSome Sounds</a>
-			<div class='flex flex-grow items-center'>
+			<div class='flex items-center'>
 				<ul class='flex flex-row mt-1'>
 					<template v-if='userStore.loggedIn'>
 						<li>
@@ -36,5 +36,5 @@
 				this.authenticationModalStore.isOpen = true;
 			}
 		}
-	}
+	};
 </script>
