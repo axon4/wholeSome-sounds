@@ -126,18 +126,18 @@
 </template>
 
 <script>
-	import useUserStore from '@/stores/user';
+	// import useUserStore from '@/stores/user';
 
 	export default {
-		name: 'manage',
-		beforeRouteEnter(to, from, next) {
-			const userStore = useUserStore();
+		name: 'manage'
+		// beforeRouteEnter(to, from, next) {
+		// 	const userStore = useUserStore();
 			
-			if (userStore.loggedIn) {
-				next();
-			} else {
-				next({name: 'home'});	
-			};
-		}
+		// 	if (userStore.loggedIn) {
+		// 		next();
+		// 	} else {
+		// 		next({name: 'home'});	
+		// 	};
+		// }
 	};
 </script>
