@@ -9,7 +9,7 @@
 							<RouterLink :to='{name: "manage"}' class='px-2 text-white'>Manage</RouterLink>
 						</li>
 						<li>
-							<a href='#' class='px-2 text-white' @click.prevent='userStore.logOut'>Log Out</a>
+							<a href='#' class='px-2 text-white' @click.prevent='logOut'>Log Out</a>
 						</li>
 					</template>
 					<li v-else>
@@ -34,6 +34,13 @@
 		methods: {
 			toggleAuthenticationModal() {					
 				this.authenticationModalStore.isOpen = true;
+			},
+			logOut() {
+				this.userStore.logOut();
+								
+				if (this.$route.name === 'manage') {
+					this.$router.push('/');
+				};
 			}
 		}
 	};
