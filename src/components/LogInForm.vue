@@ -50,6 +50,8 @@
 					
 					this.bannerVariant = 'bg-green-500';
 					this.bannerMessage = 'Log In Successful';
+					
+					setTimeout(() => {window.location.reload()}, 1000);
 				} catch (error) {
 					this.pending = false;
 					this.bannerVariant = 'bg-red-500';

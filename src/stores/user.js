@@ -17,6 +17,11 @@ const useUserStore = defineStore('user', {
 			await authentication.signInWithEmailAndPassword(eMail, passWord);
 			
 			this.loggedIn = true;
+		},
+		async logOut() {
+			await authentication.signOut();
+			
+			this.loggedIn = false;
 		}
 	}
 });
