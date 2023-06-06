@@ -205,6 +205,9 @@
 </template>
 
 <script>
+	import { mapWritableState } from 'pinia';
+	import useUserStore from '@/stores/user';
+	import { authentication } from '@/includes/fireBase';
 	import Header from '@/components/Header.vue';
 	import AuthenticationModal from '@/components/AuthenticationModal.vue';
 
@@ -213,6 +216,14 @@
 		components: {
 			Header,
 			AuthenticationModal
+		},
+		computed: {
+			...mapWritableState(useUserStore, ['loggedIn'])
+		},
+		created() {
+			if (authentication.currentUser) {
+				this.loggedIn = true;
+			};
 		}
 	};
 </script>

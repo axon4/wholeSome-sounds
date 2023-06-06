@@ -1,16 +1,22 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import Application from './Application.vue';
-import router from './router';
 import VeeValidatePlugIn from './includes/veeValidate';
-import './includes/fireBase';
+import router from './router';
+import { authentication } from './includes/fireBase';
 import './style/tailWind.css';
 import './style/style.css';
 
-const application = createApp(Application);
+let application;
 
-application.use(createPinia());
-application.use(router);
-application.use(VeeValidatePlugIn)
+authentication.onAuthStateChanged(() => {
+	if (!application) {
+		application = createApp(Application);
 
-application.mount('#root');
+		application.use(createPinia());
+		application.use(router);
+		application.use(VeeValidatePlugIn)
+
+		application.mount('#root');	
+	};
+});
