@@ -1,12 +1,12 @@
 <template>
 	<header id='header' class='bg-gray-700'>
 		<nav class='container mx-auto flex justify-between items-center py-5 px-4'>
-			<a href='#' class='text-white font-bold uppercase text-2xl mr-4'>WholeSome Sounds</a>
+			<RouterLink to='/' class='text-white font-bold uppercase text-2xl mr-4'>WholeSome Sounds</RouterLink>
 			<div class='flex items-center'>
 				<ul class='flex flex-row mt-1'>
 					<template v-if='userStore.loggedIn'>
 						<li>
-							<a href='#' class='px-2 text-white'>Manage</a>
+							<RouterLink to='/manage' class='px-2 text-white'>Manage</RouterLink>
 						</li>
 						<li>
 							<a href='#' class='px-2 text-white' @click.prevent='userStore.logOut'>Log Out</a>
