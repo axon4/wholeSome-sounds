@@ -11,79 +11,7 @@
 						<i class='fa fa-compact-disc float-right text-green-400 text-2xl'></i>
 					</div>
 					<div class='p-6'>
-						<div class='border border-gray-200 p-3 mb-4 rounded'>
-							<div>
-								<h4 class='inline-block text-2xl font-bold'>Sound</h4>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right'>
-									<i class='fa fa-times'></i>
-								</button>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right'>
-									<i class='fa fa-pencil-alt'></i>
-								</button>
-							</div>
-							<div>
-								<form>
-									<div class='mb-3'>
-										<label class='inline-block mb-2'>Sound Title</label>
-										<input type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='title' />
-									</div>
-									<div class='mb-3'>
-										<label class='inline-block mb-2'>Genre</label>
-										<input type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='genre' />
-									</div>
-									<button type='submit' class='py-1.5 px-3 rounded text-white bg-green-600'>
-										Submit
-									</button>
-									<button type='button' class='py-1.5 px-3 rounded text-white bg-gray-600'>
-										Cancel
-									</button>
-								</form>
-							</div>
-						</div>
-						<div class='border border-gray-200 p-3 mb-4 rounded'>
-							<div>
-								<h4 class='inline-block text-2xl font-bold'>Sound</h4>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right'>
-									<i class='fa fa-times'></i>
-								</button>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right'>
-									<i class='fa fa-pencil-alt'></i>
-								</button>
-							</div>
-						</div>
-						<div class='border border-gray-200 p-3 mb-4 rounded'>
-							<div>
-								<h4 class='inline-block text-2xl font-bold'>Sound</h4>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right'>
-									<i class='fa fa-times'></i>
-								</button>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right'>
-									<i class='fa fa-pencil-alt'></i>
-								</button>
-							</div>
-						</div>
-						<div class='border border-gray-200 p-3 mb-4 rounded'>
-							<div>
-								<h4 class='inline-block text-2xl font-bold'>Sound</h4>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right'>
-									<i class='fa fa-times'></i>
-								</button>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right'>
-									<i class='fa fa-pencil-alt'></i>
-								</button>
-							</div>
-						</div>
-						<div class='border border-gray-200 p-3 mb-4 rounded'>
-							<div>
-								<h4 class='inline-block text-2xl font-bold'>Sound</h4>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right'>
-									<i class='fa fa-times'></i>
-								</button>
-								<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right'>
-									<i class='fa fa-pencil-alt'></i>
-								</button>
-							</div>
-						</div>
+						<SoundItem v-for='sound in sounds' :key='sound.documentID' :sound='sound' />
 					</div>
 				</div>
 			</div>
@@ -92,11 +20,25 @@
 </template>
 
 <script>
+	import { authentication, soundsCollection } from '@/includes/fireBase';
 	import UpLoader from '@/components/UpLoader.vue';
+	import SoundItem from '@/components/SoundItem.vue';
 
 	export default {
 		name: 'manage',
-		components: { UpLoader }
+		components: { UpLoader, SoundItem },
+		data() {
+			return {sounds: []};
+		},
+		async created() {
+			const snapShot = await soundsCollection.where('uID', '==', authentication.currentUser.uid).get();
+			
+			snapShot.forEach(document => {
+				const sound = {...document.data(), documentID: document.id};
+				
+				this.sounds.push(sound);
+			});
+		}
 		// beforeRouteEnter(to, from, next) {
 		// 	if (userStore.state.loggedIn) {
 		// 		next();
