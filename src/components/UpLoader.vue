@@ -20,9 +20,12 @@
 			</div>
 			<hr class='my-6' />
 			<div class='mb-4' v-for='upLoad in upLoads' :key='upLoad.name'>
-				<div class='font-bold text-sm'>{{ upLoad.name }}</div>
+				<div class='font-bold text-sm' :class='upLoad.textClass'>
+					<i :class='upLoad.icon'></i>
+					{{ upLoad.name }}
+				</div>
 				<div class='flex h-4 overflow-hidden bg-gray-200 rounded'>
-					<div :style='{width: upLoad.progress + "%"}' class='transition-all progress-bar bg-blue-400' :class='"bg-blue-400"'></div>
+					<div :style='{width: upLoad.progress + "%"}' class='transition-all progress-bar' :class='upLoad.variant'></div>
 				</div>
 			</div>
 		</div>
@@ -55,12 +58,22 @@
 					const soundReference = storageReference.child(`sounds/${file.name}`);
 					
 					const task = soundReference.put(file);
-					const upLoadIndex = this.upLoads.push({ name: file.name, task, progress: 0 }) - 1;
+					const upLoadIndex = this.upLoads.push({ name: file.name, task, progress: 0, icon: 'fas fa-spin fa-spinner', textClass: '', variant: 'bg-blue-400' }) - 1;
 					
 					task.on('state_changed', snapShot => {
 						const currentProgress = (snapShot.bytesTransferred / snapShot.totalBytes) * 100;
 						
 						this.upLoads[upLoadIndex].progress = currentProgress;
+					}, error => {
+						this.upLoads[upLoadIndex].icon = 'fas fa-times';
+						this.upLoads[upLoadIndex].textClass = 'text-red-400';
+						this.upLoads[upLoadIndex].variant = 'bg-red-400';
+						
+						console.error(error);
+					}, () => {
+						this.upLoads[upLoadIndex].icon = 'fas fa-check';
+						this.upLoads[upLoadIndex].textClass = 'text-green-400';
+						this.upLoads[upLoadIndex].variant = 'bg-green-400';
 					});
 				});
 			}
