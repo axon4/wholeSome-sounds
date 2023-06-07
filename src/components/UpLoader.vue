@@ -18,6 +18,7 @@
 			>
 				<h5>Drop Files</h5>
 			</div>
+			<input type='file' multiple @change='upLoad' />
 			<hr class='my-6' />
 			<div class='mb-4' v-for='upLoad in upLoads' :key='upLoad.name'>
 				<div class='font-bold text-sm' :class='upLoad.textClass'>
@@ -46,8 +47,8 @@
 		methods: {
 			upLoad($event) {
 				this.draggedOver = false;
-				
-				const { files } = $event.dataTransfer;
+								
+				const { files } = $event.dataTransfer ?? $event.target;
 				
 				Object.values(files).forEach(file => {
 					if (file.type !== 'audio/mpeg') {
