@@ -90,6 +90,16 @@
 					});
 				});
 			}
+			// cancelUpLoads() {
+			// 	this.upLoads.forEach(upLoad => {
+			// 		upLoad.task.cancel();
+			// 	});
+			// }
+		},
+		beforeUnmount() {
+			this.upLoads.forEach(upLoad => {
+				upLoad.task.cancel();
+			});
 		}
 	};
 </script>

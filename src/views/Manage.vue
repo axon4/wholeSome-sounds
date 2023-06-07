@@ -2,7 +2,7 @@
 	<section class='container mx-auto mt-6'>
 		<div class='md:grid md:grid-cols-3 md:gap-4'>
 			<div class='col-span-1'>
-				<UpLoader />
+				<UpLoader ref='upLoader' />
 			</div>
 			<div class='col-span-2'>
 				<div class='bg-white rounded border border-gray-200 relative flex flex-col'>
@@ -97,5 +97,17 @@
 	export default {
 		name: 'manage',
 		components: { UpLoader }
+		// beforeRouteEnter(to, from, next) {
+		// 	if (userStore.state.loggedIn) {
+		// 		next();
+		// 	} else {
+		// 		next({name: 'home'});
+		// 	};
+		// },
+		// beforeRouteLeave(to, from, next) {
+		// 	this.$refs.upLoader.cancelUpLoads();
+						
+		// 	next();
+		// }
 	};
 </script>
