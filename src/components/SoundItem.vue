@@ -2,7 +2,7 @@
 	<div class='border border-gray-200 p-3 mb-4 rounded'>
 		<div v-show='!formVisible'>
 			<h4 class='inline-block text-2xl font-bold'>{{ sound.modifiedName }}</h4>
-			<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right'>
+			<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right' @click='deleteSound'>
 				<i class='fa fa-times'></i>
 			</button>
 			<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right' @click='formVisible = !formVisible'>
@@ -36,14 +36,15 @@
 </template>
 
 <script>
-	import { soundsCollection } from '@/includes/fireBase';
+	import { soundsCollection, storage } from '@/includes/fireBase';
 
 	export default {
 		name: 'SoundItem',
 		props: {
 			index: {type: Number, required: true},
 			sound: {type: Object, required: true},
-			updateSound: {type: Function, required: true}
+			updateSound: {type: Function, required: true},
+			removeSound: {type: Function, required: true}
 		},
 		data() {
 			return {
@@ -77,6 +78,24 @@
 					this.alertVariant = 'bg-red-500';
 					this.alertMessage = 'Error Updating Sound MetaData';
 				};
+			},
+			async deleteSound() {
+				try {
+					const storageReference = storage.ref();
+					const soundReference = storageReference.child(`sounds/${this.sound.originalName}`);
+
+					await soundReference.delete();
+				} catch (error) {
+					console.error(error);
+				};
+
+				try {
+					await soundsCollection.doc(this.sound.documentID).delete();
+				} catch (error) {
+					console.error(error);
+				};
+
+				this.removeSound(this.index);
 			}
 		}
 	};

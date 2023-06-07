@@ -11,7 +11,7 @@
 						<i class='fa fa-compact-disc float-right text-green-400 text-2xl'></i>
 					</div>
 					<div class='p-6'>
-						<SoundItem v-for='(sound, index) in sounds' :key='sound.documentID' :index='index' :sound='sound' :updateSound='updateSound' />
+						<SoundItem v-for='(sound, index) in sounds' :key='sound.documentID' :index='index' :sound='sound' :updateSound='updateSound' :removeSound='removeSound' />
 					</div>
 				</div>
 			</div>
@@ -55,7 +55,10 @@
 			updateSound(index, values) {
 				this.sounds[index].modifiedName = values.modifiedName;
 				this.sounds[index].genre = values.genre;
-			}
+			},
+            removeSound(index) {
+                this.sounds.splice(index, 1);
+            }
 		}
 	};
 </script>
