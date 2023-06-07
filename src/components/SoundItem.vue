@@ -10,14 +10,16 @@
 			</button>
 		</div>
 		<div v-show='formVisible'>
-			<form>
+			<Form :validation-schema='schema' :initial-values='sound' @submit='submit'>
 				<div class='mb-3'>
 					<label class='inline-block mb-2'>Sound Title</label>
-					<input type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='title' />
+					<Field name='modifiedName' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='title' />
+					<ErrorMessage name='modifiedName' class='text-red-600' />
 				</div>
 				<div class='mb-3'>
 					<label class='inline-block mb-2'>Genre</label>
-					<input type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='genre' />
+					<Field name='genre' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='genre' />
+					<ErrorMessage name='genre' class='text-red-600' />
 				</div>
 				<button type='submit' class='py-1.5 px-3 rounded text-white bg-green-600'>
 					Submit
@@ -25,7 +27,7 @@
 				<button type='button' class='py-1.5 px-3 rounded text-white bg-gray-600'>
 					Cancel
 				</button>
-			</form>
+			</Form>
 		</div>
 	</div>
 </template>
@@ -37,7 +39,18 @@
 			sound: {type: Object, required: true}
 		},
 		data() {
-			return {formVisible: false};
+			return {
+				formVisible: false,
+				schema: {
+					modifiedName: 'required',
+					genre: 'alpha_spaces'
+				}
+			};
+		},
+		methods: {
+			submit() {
+				console.log('SUBMIT');
+			}
 		}
 	};
 </script>
