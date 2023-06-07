@@ -42,6 +42,8 @@
 </template>
 
 <script>
+	import { storage } from '@/includes/fireBase.js';
+
 	export default {
 		name: 'upLoader',
 		data() {
@@ -50,8 +52,21 @@
 			};
 		},
 		methods: {
-			upLoad() {
+			upLoad($event) {
 				this.draggedOver = false;
+				
+				const { files } = $event.dataTransfer;
+				
+				Object.values(files).forEach(file => {
+					if (file.type !== 'audio/mpeg') {
+						return;
+					};
+					
+					const storageReference = storage.ref();
+					const soundReference = storageReference.child(`sounds/${file.name}`);
+					
+					soundReference.put(file);
+				});
 			}
 		}
 	};
