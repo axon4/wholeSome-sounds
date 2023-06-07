@@ -19,22 +19,10 @@
 				<h5>Drop Files</h5>
 			</div>
 			<hr class='my-6' />
-			<div class='mb-4'>
-				<div class='font-bold text-sm'>sound.mp3</div>
+			<div class='mb-4' v-for='upLoad in upLoads' :key='upLoad.name'>
+				<div class='font-bold text-sm'>{{ upLoad.name }}</div>
 				<div class='flex h-4 overflow-hidden bg-gray-200 rounded'>
-					<div class='transition-all progress-bar bg-blue-400' style='width: 75%'></div>
-				</div>
-			</div>
-			<div class='mb-4'>
-				<div class='font-bold text-sm'>sound.mp3</div>
-				<div class='flex h-4 overflow-hidden bg-gray-200 rounded'>
-					<div class='transition-all progress-bar bg-blue-400' style='width: 35%'></div>
-				</div>
-			</div>
-			<div class='mb-4'>
-				<div class='font-bold text-sm'>sound.mp3</div>
-				<div class='flex h-4 overflow-hidden bg-gray-200 rounded'>
-					<div class='transition-all progress-bar bg-blue-400' style='width: 55%'></div>
+					<div :style='{width: upLoad.progress + "%"}' class='transition-all progress-bar bg-blue-400' :class='"bg-blue-400"'></div>
 				</div>
 			</div>
 		</div>
@@ -48,7 +36,8 @@
 		name: 'upLoader',
 		data() {
 			return {
-				draggedOver: false
+				draggedOver: false,
+				upLoads: []
 			};
 		},
 		methods: {
@@ -65,7 +54,14 @@
 					const storageReference = storage.ref();
 					const soundReference = storageReference.child(`sounds/${file.name}`);
 					
-					soundReference.put(file);
+					const task = soundReference.put(file);
+					const upLoadIndex = this.upLoads.push({ name: file.name, task, progress: 0 }) - 1;
+					
+					task.on('state_changed', snapShot => {
+						const currentProgress = (snapShot.bytesTransferred / snapShot.totalBytes) * 100;
+						
+						this.upLoads[upLoadIndex].progress = currentProgress;
+					});
 				});
 			}
 		}
