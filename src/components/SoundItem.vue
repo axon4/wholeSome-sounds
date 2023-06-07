@@ -1,15 +1,15 @@
 <template>
 	<div class='border border-gray-200 p-3 mb-4 rounded'>
-		<div>
-			<h4 class='inline-block text-2xl font-bold'>Sound</h4>
+		<div v-show='!formVisible'>
+			<h4 class='inline-block text-2xl font-bold'>{{ sound.modifiedName }}</h4>
 			<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right'>
 				<i class='fa fa-times'></i>
 			</button>
-			<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right'>
+			<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right' @click='formVisible = !formVisible'>
 				<i class='fa fa-pencil-alt'></i>
 			</button>
 		</div>
-		<div>
+		<div v-show='formVisible'>
 			<form>
 				<div class='mb-3'>
 					<label class='inline-block mb-2'>Sound Title</label>
@@ -35,6 +35,9 @@
 		name: 'SoundItem',
 		props: {
 			sound: {type: Object, required: true}
+		},
+		data() {
+			return {formVisible: false};
 		}
 	};
 </script>
