@@ -94,8 +94,6 @@
 					this.pending = false;
 					this.bannerVariant = 'bg-red-500';
 					this.bannerMessage = 'Error Registering';
-
-					return;
 				};
 			}
 		}

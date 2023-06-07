@@ -11,7 +11,7 @@
 						<i class='fa fa-compact-disc float-right text-green-400 text-2xl'></i>
 					</div>
 					<div class='p-6'>
-						<SoundItem v-for='sound in sounds' :key='sound.documentID' :sound='sound' />
+						<SoundItem v-for='(sound, index) in sounds' :key='sound.documentID' :index='index' :sound='sound' :updateSound='updateSound' />
 					</div>
 				</div>
 			</div>
@@ -38,7 +38,7 @@
 				
 				this.sounds.push(sound);
 			});
-		}
+		},
 		// beforeRouteEnter(to, from, next) {
 		// 	if (userStore.state.loggedIn) {
 		// 		next();
@@ -51,5 +51,11 @@
 						
 		// 	next();
 		// }
+		methods: {
+			updateSound(index, values) {
+				this.sounds[index].modifiedName = values.modifiedName;
+				this.sounds[index].genre = values.genre;
+			}
+		}
 	};
 </script>

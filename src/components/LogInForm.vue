@@ -56,8 +56,6 @@
 					this.pending = false;
 					this.bannerVariant = 'bg-red-500';
 					this.bannerMessage = 'Error Logging In';
-
-					return;	
 				};
 			}
 		}

@@ -10,6 +10,9 @@
 			</button>
 		</div>
 		<div v-show='formVisible'>
+			<div class='text-white text-center font-bold p-4 mb-4' :class='alertVariant' v-if='showAlert'>
+				{{ alertMessage }}
+			</div>
 			<Form :validation-schema='schema' :initial-values='sound' @submit='submit'>
 				<div class='mb-3'>
 					<label class='inline-block mb-2'>Sound Title</label>
@@ -21,10 +24,10 @@
 					<Field name='genre' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='genre' />
 					<ErrorMessage name='genre' class='text-red-600' />
 				</div>
-				<button type='submit' class='py-1.5 px-3 rounded text-white bg-green-600'>
+				<button type='submit' class='py-1.5 px-3 rounded text-white bg-green-600' :disabled='pending'>
 					Submit
 				</button>
-				<button type='button' class='py-1.5 px-3 rounded text-white bg-gray-600'>
+				<button type='button' class='py-1.5 px-3 rounded text-white bg-gray-600' :disabled='pending' @click='formVisible = false'>
 					Cancel
 				</button>
 			</Form>
@@ -33,10 +36,14 @@
 </template>
 
 <script>
+	import { soundsCollection } from '@/includes/fireBase';
+
 	export default {
 		name: 'SoundItem',
 		props: {
-			sound: {type: Object, required: true}
+			index: {type: Number, required: true},
+			sound: {type: Object, required: true},
+			updateSound: {type: Function, required: true}
 		},
 		data() {
 			return {
@@ -44,12 +51,32 @@
 				schema: {
 					modifiedName: 'required',
 					genre: 'alpha_spaces'
-				}
+				},
+				pending: false,
+				showAlert: false,
+				alertVariant: 'bg-blue-500',
+				alertMessage: 'Updating Sound MetaData'
 			};
 		},
 		methods: {
-			submit() {
-				console.log('SUBMIT');
+			async submit(values) {
+				this.pending = true;
+				this.showAlert = true;
+				this.alertVariant = 'bg-blue-500';
+				this.alertMessage = 'Updating Sound MetaData';
+				
+				try {
+					await soundsCollection.doc(this.sound.documentID).update(values);
+					this.updateSound(this.index, values);
+					
+					this.pending = false;
+					this.alertVariant = 'bg-green-500';
+					this.alertMessage = 'Updating Sound MetaData Successful';
+				} catch (error) {
+					this.pending = false;
+					this.alertVariant = 'bg-red-500';
+					this.alertMessage = 'Error Updating Sound MetaData';
+				};
 			}
 		}
 	};
