@@ -33,7 +33,7 @@
 </template>
 
 <script>
-	import { storage } from '@/includes/fireBase.js';
+	import { authentication, soundsCollection, storage } from '@/includes/fireBase.js';
 
 	export default {
 		name: 'upLoader',
@@ -70,7 +70,19 @@
 						this.upLoads[upLoadIndex].variant = 'bg-red-400';
 						
 						console.error(error);
-					}, () => {
+					}, async () => {
+						const sound = {
+							uID: authentication.currentUser.uid,
+							displayName: authentication.currentUser.displayName,
+							originalName: task.snapshot.ref.name,
+							modifiedName: task.snapshot.ref.name,
+							genre: '',
+							commentCount: 0
+						};
+						
+						sound.URL = await task.snapshot.ref.getDownloadURL();
+						await soundsCollection.add(sound);
+						
 						this.upLoads[upLoadIndex].icon = 'fas fa-check';
 						this.upLoads[upLoadIndex].textClass = 'text-green-400';
 						this.upLoads[upLoadIndex].variant = 'bg-green-400';

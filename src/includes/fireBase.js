@@ -19,6 +19,7 @@ export const authentication = fireBase.auth();
 const fireStore = fireBase.firestore();
 
 export const usersCollection = fireStore.collection('users');
+export const soundsCollection = fireStore.collection('sounds');
 
 export const storage = fireBase.storage();
 
