@@ -2,7 +2,7 @@
 	<section class='container mx-auto mt-6'>
 		<div class='md:grid md:grid-cols-3 md:gap-4'>
 			<div class='col-span-1'>
-				<UpLoader ref='upLoader' />
+				<UpLoader ref='upLoader' :addSound='addSound' />
 			</div>
 			<div class='col-span-2'>
 				<div class='bg-white rounded border border-gray-200 relative flex flex-col'>
@@ -33,11 +33,7 @@
 		async created() {
 			const snapShot = await soundsCollection.where('uID', '==', authentication.currentUser.uid).get();
 			
-			snapShot.forEach(document => {
-				const sound = {...document.data(), documentID: document.id};
-				
-				this.sounds.push(sound);
-			});
+			snapShot.forEach(this.addSound);
 		},
 		// beforeRouteEnter(to, from, next) {
 		// 	if (userStore.state.loggedIn) {
@@ -58,6 +54,11 @@
 			},
             removeSound(index) {
                 this.sounds.splice(index, 1);
+            },
+            addSound(document) {
+                const sound = {...document.data(), documentID: document.id};
+				
+				this.sounds.push(sound);
             }
 		}
 	};

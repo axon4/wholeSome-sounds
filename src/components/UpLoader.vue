@@ -38,6 +38,7 @@
 
 	export default {
 		name: 'upLoader',
+        props: ['addSound'],
 		data() {
 			return {
 				draggedOver: false,
@@ -82,7 +83,10 @@
 						};
 						
 						sound.URL = await task.snapshot.ref.getDownloadURL();
-						await soundsCollection.add(sound);
+
+						const soundReference = await soundsCollection.add(sound);
+                        const soundSnapShot = await soundReference.get();
+                        this.addSound(soundSnapShot);
 						
 						this.upLoads[upLoadIndex].icon = 'fas fa-check';
 						this.upLoads[upLoadIndex].textClass = 'text-green-400';
