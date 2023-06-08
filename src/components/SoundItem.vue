@@ -16,12 +16,12 @@
 			<Form :validation-schema='schema' :initial-values='sound' @submit='submit'>
 				<div class='mb-3'>
 					<label class='inline-block mb-2'>Sound Title</label>
-					<Field name='modifiedName' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='title' />
+					<Field name='modifiedName' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='title' @input='this.updateUnSavedChangesFlag(true)' />
 					<ErrorMessage name='modifiedName' class='text-red-600' />
 				</div>
 				<div class='mb-3'>
 					<label class='inline-block mb-2'>Genre</label>
-					<Field name='genre' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='genre' />
+					<Field name='genre' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='genre' @input='this.updateUnSavedChangesFlag(true)' />
 					<ErrorMessage name='genre' class='text-red-600' />
 				</div>
 				<button type='submit' class='py-1.5 px-3 rounded text-white bg-green-600' :disabled='pending'>
@@ -44,7 +44,8 @@
 			index: {type: Number, required: true},
 			sound: {type: Object, required: true},
 			updateSound: {type: Function, required: true},
-			removeSound: {type: Function, required: true}
+			removeSound: {type: Function, required: true},
+			updateUnSavedChangesFlag: {type: Function},
 		},
 		data() {
 			return {
@@ -69,6 +70,7 @@
 				try {
 					await soundsCollection.doc(this.sound.documentID).update(values);
 					this.updateSound(this.index, values);
+                    this.updateUnSavedChangesFlag(false);
 					
 					this.pending = false;
 					this.alertVariant = 'bg-green-500';

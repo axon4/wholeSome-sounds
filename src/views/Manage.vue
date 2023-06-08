@@ -11,7 +11,7 @@
 						<i class='fa fa-compact-disc float-right text-green-400 text-2xl'></i>
 					</div>
 					<div class='p-6'>
-						<SoundItem v-for='(sound, index) in sounds' :key='sound.documentID' :index='index' :sound='sound' :updateSound='updateSound' :removeSound='removeSound' />
+						<SoundItem v-for='(sound, index) in sounds' :key='sound.documentID' :index='index' :sound='sound' :updateSound='updateSound' :removeSound='removeSound' :updateUnSavedChangesFlag='updateUnSavedChangesFlag' />
 					</div>
 				</div>
 			</div>
@@ -28,12 +28,24 @@
 		name: 'manage',
 		components: { UpLoader, SoundItem },
 		data() {
-			return {sounds: []};
+			return {
+				sounds: [],
+				unSavedChangesFlag: false
+			};
 		},
 		async created() {
 			const snapShot = await soundsCollection.where('uID', '==', authentication.currentUser.uid).get();
 			
 			snapShot.forEach(this.addSound);
+		},
+		beforeRouteLeave(to, from, next) {
+			if (!this.unSavedChangesFlag) {
+				next();
+			} else {
+				const leave = confirm('You Have UnSaved Changes. Do You Want To Leave This Page?');
+
+				next(leave);
+			};
 		},
 		// beforeRouteEnter(to, from, next) {
 		// 	if (userStore.state.loggedIn) {
@@ -52,14 +64,17 @@
 				this.sounds[index].modifiedName = values.modifiedName;
 				this.sounds[index].genre = values.genre;
 			},
-            removeSound(index) {
-                this.sounds.splice(index, 1);
-            },
-            addSound(document) {
-                const sound = {...document.data(), documentID: document.id};
+			removeSound(index) {
+				this.sounds.splice(index, 1);
+			},
+			addSound(document) {
+				const sound = {...document.data(), documentID: document.id};
 				
 				this.sounds.push(sound);
-            }
+			},
+			updateUnSavedChangesFlag(boolean) {
+				this.unSavedChangesFlag = boolean;
+			}
 		}
 	};
 </script>
