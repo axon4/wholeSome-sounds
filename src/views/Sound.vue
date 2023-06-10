@@ -6,8 +6,8 @@
 				<i class='fas fa-play'></i>
 			</button>
 			<div class='z-50 text-left ml-8'>
-				<div class='text-3xl font-bold'>Sound</div>
-				<div>Author</div>
+				<div class='text-3xl font-bold'>{{ sound.modifiedName }}</div>
+				<div>{{ sound.genre }}</div>
 			</div>
 		</div>
 	</section>
@@ -78,7 +78,25 @@
 </template>
 
 <script>
+	import { soundsCollection } from '@/includes/fireBase';
+
 	export default {
-		name: 'Sound'
+		name: 'Sound',
+		data() {
+			return {
+				sound: {}
+			};
+		},
+		async created() {
+			const snapShot = await soundsCollection.doc(this.$route.params.ID).get();
+
+			if (snapShot.exists) {
+				this.sound = snapShot.data();
+			} else {
+				this.$router.push({name: 'home'});
+
+				return;
+			}
+		}
 	};
 </script>
