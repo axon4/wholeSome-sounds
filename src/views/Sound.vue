@@ -18,12 +18,13 @@
 				<i class='fa fa-comments float-right text-green-400 text-2xl'></i>
 			</div>
 			<div class='p-6'>
-				<form>
-					<textarea class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded mb-4' placeholder='comment'></textarea>
+				<Form :validation-schema='schema'>
+					<Field as='textarea' name='comment' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded mb-4' placeholder='comment'></Field>
+					<ErrorMessage name='comment' class='text-red-600' />
 					<button type='submit' class='py-1.5 px-3 rounded text-white bg-green-600 block'>
 						Submit
 					</button>
-				</form>
+				</Form>
 				<select class='block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded'>
 					<option value='1'>Newest</option>
 					<option value='2'>Oldest</option>
@@ -84,7 +85,10 @@
 		name: 'Sound',
 		data() {
 			return {
-				sound: {}
+				sound: {},
+				schema: {
+					comment: 'required|min:3'
+				}
 			};
 		},
 		async created() {
