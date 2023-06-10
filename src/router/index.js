@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import useUserStore from '@/stores/user';
 import Home from '@/views/Home.vue';
 import Manage from '@/views/Manage.vue';
-import useUserStore from '@/stores/user';
+import Sound from '@/views/Sound.vue';
 
 const routes = [
 	{
@@ -16,6 +17,11 @@ const routes = [
 		component: Manage,
 		meta: {authenticationRequired: true}
 	},
+    {
+        name: 'sound',
+        path: '/sound/:ID',
+        component: Sound
+    },
 	{
 		name: 'catchAll',
 		path: '/:catchAll(.*)*',
