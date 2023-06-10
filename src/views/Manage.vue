@@ -11,7 +11,7 @@
 						<i class='fa fa-compact-disc float-right text-green-400 text-2xl'></i>
 					</div>
 					<div class='p-6'>
-						<SoundItem v-for='(sound, index) in sounds' :key='sound.documentID' :index='index' :sound='sound' :updateSound='updateSound' :removeSound='removeSound' :updateUnSavedChangesFlag='updateUnSavedChangesFlag' />
+						<CompositionItem v-for='(sound, index) in sounds' :key='sound.documentID' :index='index' :sound='sound' :updateSound='updateSound' :removeSound='removeSound' :updateUnSavedChangesFlag='updateUnSavedChangesFlag' />
 					</div>
 				</div>
 			</div>
@@ -22,11 +22,11 @@
 <script>
 	import { authentication, soundsCollection } from '@/includes/fireBase';
 	import UpLoader from '@/components/UpLoader.vue';
-	import SoundItem from '@/components/SoundItem.vue';
+	import CompositionItem from '@/components/CompositionItem.vue';
 
 	export default {
 		name: 'manage',
-		components: { UpLoader, SoundItem },
+		components: { UpLoader, CompositionItem },
 		data() {
 			return {
 				sounds: [],

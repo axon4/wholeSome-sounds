@@ -39,7 +39,7 @@
 	import { soundsCollection, storage } from '@/includes/fireBase';
 
 	export default {
-		name: 'SoundItem',
+		name: 'CompositionItem',
 		props: {
 			index: {type: Number, required: true},
 			sound: {type: Object, required: true},
