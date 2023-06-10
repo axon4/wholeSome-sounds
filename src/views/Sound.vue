@@ -36,47 +36,12 @@
 		</div>
 	</section>
 	<ul class='container mx-auto'>
-		<li class='p-6 bg-gray-50 border border-gray-200'>
+		<li class='p-6 bg-gray-50 border border-gray-200' v-for='comment in comments' :key='comment.documentID'>
 			<div class='mb-5'>
-				<div class='font-bold'>Joe Smith</div>
-				<time>7 Minutes Ago</time>
+				<div class='font-bold'>{{ comment.commenter }}</div>
+				<time>{{ comment.date }}</time>
 			</div>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-		</li>
-		<li class='p-6 bg-gray-50 border border-gray-200'>
-			<div class='mb-5'>
-				<div class='font-bold'>Joe Smith</div>
-				<time>7 Minutes Ago</time>
-			</div>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-		</li>
-		<li class='p-6 bg-gray-50 border border-gray-200'>
-			<div class='mb-5'>
-				<div class='font-bold'>Joe Smith</div>
-				<time>7 Minutes Ago</time>
-			</div>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-		</li>
-		<li class='p-6 bg-gray-50 border border-gray-200'>
-			<div class='mb-5'>
-				<div class='font-bold'>Joe Smith</div>
-				<time>7 Minutes Ago</time>
-			</div>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-		</li>
-		<li class='p-6 bg-gray-50 border border-gray-200'>
-			<div class='mb-5'>
-				<div class='font-bold'>Joe Smith</div>
-				<time>7 Minutes Ago</time>
-			</div>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
-		</li>
-		<li class='p-6 bg-gray-50 border border-gray-200'>
-			<div class='mb-5'>
-				<div class='font-bold'>Joe Smith</div>
-				<time>7 Minutes Ago</time>
-			</div>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
+			<p>{{ comment.value }}</p>
 		</li>
 	</ul>
 </template>
@@ -94,6 +59,7 @@
 				schema: {
 					comment: 'required|min:3'
 				},
+				comments: [],
 				pending: false,
 				showBanner: false,
 				bannerVariant: 'bg-blue-500',
@@ -108,6 +74,7 @@
 
 			if (snapShot.exists) {
 				this.sound = snapShot.data();
+				this.getComments();
 			} else {
 				this.$router.push({name: 'home'});
 
@@ -130,12 +97,22 @@
 				};
 
 				await commentsCollection.add(comment);
+				this.getComments();
 
 				this.pending = false;
 				this.bannerVariant = 'bg-green-500';
 				this.bannerMessage = 'Comment Successful';
 
 				resetForm();
+			},
+			async getComments() {
+				const snapShots = await commentsCollection.where('soundID', '==', this.$route.params.ID).get();
+
+				this.comments = [];
+
+				snapShots.forEach(document => {
+					this.comments.push({documentID: document.id, ...document.data()});
+				});
 			}
 		}
 	};
