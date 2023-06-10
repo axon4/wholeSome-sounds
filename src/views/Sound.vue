@@ -87,6 +87,10 @@
 			if (snapShot.exists) {
 				this.sound = snapShot.data();
 				this.getComments();
+
+				const { sort } = this.$route.query;
+
+				this.sort = sort === 'newest' || sort === 'oldest' ? sort : 'newest';
 			} else {
 				this.$router.push({name: 'home'});
 
@@ -125,6 +129,17 @@
 				snapShots.forEach(document => {
 					this.comments.push({documentID: document.id, ...document.data()});
 				});
+			}
+		},
+		watch: {
+			sort(newValue) {
+				if (newValue !== this.$route.query.sort) {
+					this.$router.push({
+						query: {
+							sort: newValue
+						}
+					});
+				};
 			}
 		}
 	};
