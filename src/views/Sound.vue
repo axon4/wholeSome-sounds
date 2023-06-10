@@ -18,10 +18,13 @@
 				<i class='fa fa-comments float-right text-green-400 text-2xl'></i>
 			</div>
 			<div class='p-6'>
-				<Form :validation-schema='schema'>
+				<div class='text-white text-center font-bold p-4 mb-4' :class='bannerVariant' v-if='showBanner'>
+					{{ bannerMessage }}
+				</div>
+				<Form :validation-schema='schema' @submit='submit' v-if='loggedIn'>
 					<Field as='textarea' name='comment' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded mb-4' placeholder='comment'></Field>
 					<ErrorMessage name='comment' class='text-red-600' />
-					<button type='submit' class='py-1.5 px-3 rounded text-white bg-green-600 block'>
+					<button type='submit' class='py-1.5 px-3 rounded text-white bg-green-600 block' :disabled='pending'>
 						Submit
 					</button>
 				</Form>
@@ -79,7 +82,9 @@
 </template>
 
 <script>
-	import { soundsCollection } from '@/includes/fireBase';
+	import { mapState } from 'pinia';
+	import { authentication, commentsCollection, soundsCollection } from '@/includes/fireBase';
+	import useUserStore from '@/stores/user';
 
 	export default {
 		name: 'Sound',
@@ -88,8 +93,15 @@
 				sound: {},
 				schema: {
 					comment: 'required|min:3'
-				}
+				},
+				pending: false,
+				showBanner: false,
+				bannerVariant: 'bg-blue-500',
+				bannerMessage: 'Submitting Comment'
 			};
+		},
+		computed: {
+			...mapState(useUserStore, ['loggedIn'])
 		},
 		async created() {
 			const snapShot = await soundsCollection.doc(this.$route.params.ID).get();
@@ -100,6 +112,30 @@
 				this.$router.push({name: 'home'});
 
 				return;
+			}
+		},
+		methods: {
+			async submit(values, { resetForm }) {
+				this.pending = true;
+				this.showBanner = true;
+				this.bannerVariant = 'bg-blue-500';
+				this.bannerMessage = 'Submitting Comment';
+
+				const comment = {
+					uID: authentication.currentUser.uid,
+					commenter: authentication.currentUser.displayName,
+					soundID: this.$route.params.ID,
+					date: (new Date()).toString(),
+					value: values.comment
+				};
+
+				await commentsCollection.add(comment);
+
+				this.pending = false;
+				this.bannerVariant = 'bg-green-500';
+				this.bannerMessage = 'Comment Successful';
+
+				resetForm();
 			}
 		}
 	};
