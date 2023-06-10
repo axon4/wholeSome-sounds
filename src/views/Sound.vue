@@ -28,15 +28,15 @@
 						Submit
 					</button>
 				</Form>
-				<select class='block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded'>
-					<option value='1'>Newest</option>
-					<option value='2'>Oldest</option>
+				<select class='block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' v-model='sort'>
+					<option value='newest'>Newest</option>
+					<option value='oldest'>Oldest</option>
 				</select>
 			</div>
 		</div>
 	</section>
 	<ul class='container mx-auto'>
-		<li class='p-6 bg-gray-50 border border-gray-200' v-for='comment in comments' :key='comment.documentID'>
+		<li class='p-6 bg-gray-50 border border-gray-200' v-for='comment in sortedComments' :key='comment.documentID'>
 			<div class='mb-5'>
 				<div class='font-bold'>{{ comment.commenter }}</div>
 				<time>{{ comment.date }}</time>
@@ -60,6 +60,7 @@
 					comment: 'required|min:3'
 				},
 				comments: [],
+				sort: 'newest',
 				pending: false,
 				showBanner: false,
 				bannerVariant: 'bg-blue-500',
@@ -67,7 +68,18 @@
 			};
 		},
 		computed: {
-			...mapState(useUserStore, ['loggedIn'])
+			...mapState(useUserStore, ['loggedIn']),
+			sortedComments() {
+				const sortedComments = this.comments.slice().sort((a, b) => {
+					if (this.sort === 'newest') {
+						return ((new Date(b.date)) - (new Date(a.date)));
+					} else {
+						return ((new Date(a.date)) - (new Date(b.date)));
+					};
+				});
+
+				return sortedComments;
+			}
 		},
 		async created() {
 			const snapShot = await soundsCollection.doc(this.$route.params.ID).get();
