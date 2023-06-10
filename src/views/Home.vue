@@ -36,15 +36,51 @@
 		components: { SoundItem },
 		data() {
 			return {
-				sounds: []
+				sounds: [],
+				resultsPerPage: 19,
+				pending: false
 			};
 		},
 		async created() {
-			const snapShots = await soundsCollection.get();
+			this.getSounds();
+			
+			window.addEventListener('scroll', this.handleScroll);
+		},
+		methods: {
+			async getSounds() {
+				if (this.pending) return;
 
-			snapShots.forEach(document => {
-				this.sounds.push({documentID: document.id, ...document.data()});
-			});
+				this.pending = true;
+
+				let snapShots;
+
+				if (this.sounds.length) {
+					const lastDocument = await soundsCollection.doc(this.sounds[this.sounds.length - 1].documentID).get();
+
+					snapShots = await soundsCollection.orderBy('modifiedName').startAfter(lastDocument).limit(this.resultsPerPage).get();
+				} else {
+					snapShots = await soundsCollection.orderBy('modifiedName').limit(this.resultsPerPage).get();
+				};
+
+				snapShots.forEach(document => {
+					this.sounds.push({documentID: document.id, ...document.data()});
+				});
+
+				this.pending = false;
+			},
+			handleScroll() {
+				const { innerHeight } = window;
+				const { offsetHeight, scrollTop } = document.documentElement;
+
+				const scrolledToBottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
+
+				if (scrolledToBottomOfWindow) {
+					this.getSounds();
+				};
+			}
+		},
+		beforeUnmount() {
+			window.removeEventListener('scroll', this.handleScroll);
 		}
 	};
 </script>
