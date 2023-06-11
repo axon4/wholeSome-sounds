@@ -15,7 +15,15 @@ const usePlayerStore = defineStore('player', {
 			});
 
 			this.audio.play();
+		},
+		async toggleAudio() {
+			if (this.audio.playing) {
+				this.audio[this.audio.playing() ? 'pause' : 'play']();
+			};
 		}
+	},
+	getters: {
+		playing: state => state.audio.playing ? state.audio.playing() : false
 	}
 });
 

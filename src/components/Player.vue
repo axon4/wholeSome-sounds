@@ -6,8 +6,8 @@
 			<span class='sound-author'>Author</span>
 		</div>
 		<div class='flex flex-nowrap gap-4 items-center'>
-			<button type='button'>
-				<i class='fa fa-play text-gray-500 text-xl'></i>
+			<button type='button' @click='toggleAudio'>
+				<i class='fa text-gray-500 text-xl' :class='{"fa-play": !playing, "fa-pause": playing}'></i>
 			</button>
 			<div class='player-current-time'>00:00</div>
 			<div class='w-full h-2 rounded bg-gray-200 relative cursor-pointer'>
@@ -22,7 +22,16 @@
 </template>
 
 <script>
+	import { mapActions, mapState } from 'pinia';
+	import usePlayerStore from '@/stores/player';
+
 	export default {
-		name: 'Player'
+		name: 'Player',
+		methods: {
+			...mapActions(usePlayerStore, ['toggleAudio'])
+		},
+		computed: {
+			...mapState(usePlayerStore, ['playing'])
+		}
 	};
 </script>
