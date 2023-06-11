@@ -5,10 +5,12 @@
 			<span class='text-gray-500 text-sm'>{{ sound.displayName }}</span>
 		</div>
 		<div class='text-gray-600 text-lg'>
-			<span class='comments'>
-				<i class='fa fa-comments text-gray-600'></i>
-				{{ sound.commentCount }}
-			</span>
+			<RouterLink :to='{name: "sound", params: {ID: sound.documentID}, hash: "#comments"}' custom v-slot='{ navigate }'>
+				<span class='comments' @click='navigate'>
+					<i class='fa fa-comments text-gray-600'></i>
+					{{ sound.commentCount }}
+				</span>
+			</RouterLink>
 		</div>
 	</li>
 </template>
