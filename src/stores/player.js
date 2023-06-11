@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { Howl } from 'howler';
+import formatTime from '@/utility/formatTime';
 
 const usePlayerStore = defineStore('player', {
 	state: () => ({
@@ -28,8 +29,8 @@ const usePlayerStore = defineStore('player', {
 			};
 		},
 		progress() {
-			this.seek = this.audio.seek();
-			this.duration = this.audio.duration();
+			this.seek = formatTime(this.audio.seek());
+			this.duration = formatTime(this.audio.duration());
 
 			if (this.audio.playing()) {
 				requestAnimationFrame(this.progress);
