@@ -2,7 +2,7 @@
 	<section class='w-full mb-8 py-14 text-center text-white relative'>
 		<div style='background-image: url(images/header2.png)' class='absolute inset-0 w-full h-full box-border bg-contain track-background'></div>
 		<div class='container mx-auto flex items-center'>
-			<button type='button' class='z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none'>
+			<button type='button' class='z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none' @click='newSound(sound)'>
 				<i class='fas fa-play'></i>
 			</button>
 			<div class='z-50 text-left ml-8'>
@@ -47,9 +47,10 @@
 </template>
 
 <script>
-	import { mapState } from 'pinia';
+	import { mapActions, mapState } from 'pinia';
 	import { authentication, commentsCollection, soundsCollection } from '@/includes/fireBase';
 	import useUserStore from '@/stores/user';
+	import usePlayerStore from '@/stores/player';
 
 	export default {
 		name: 'Sound',
@@ -131,7 +132,8 @@
 				snapShots.forEach(document => {
 					this.comments.push({documentID: document.id, ...document.data()});
 				});
-			}
+			},
+			...mapActions(usePlayerStore, ['newSound'])
 		},
 		watch: {
 			sort(newValue) {
