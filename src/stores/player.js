@@ -7,7 +7,8 @@ const usePlayerStore = defineStore('player', {
 		currentSound: {},
 		audio: {},
 		seek: '00:00',
-		duration: '00:00'
+		duration: '00:00',
+		playerProgress: '0%'
 	}),
 	actions: {
 		async newSound(sound) {
@@ -31,6 +32,8 @@ const usePlayerStore = defineStore('player', {
 		progress() {
 			this.seek = formatTime(this.audio.seek());
 			this.duration = formatTime(this.audio.duration());
+
+			this.playerProgress = `${(this.audio.seek() / this.audio.duration()) * 100}%`;
 
 			if (this.audio.playing()) {
 				requestAnimationFrame(this.progress);
