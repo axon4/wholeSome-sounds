@@ -3,7 +3,7 @@
 		<div style='background-image: url(images/header2.png)' class='absolute inset-0 w-full h-full box-border bg-contain track-background'></div>
 		<div class='container mx-auto flex items-center'>
 			<button type='button' class='z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none' @click='newSound(sound)'>
-				<i class='fas fa-play'></i>
+				<i class='fas' :class='{"fa-play": !playing, "fa-sync-alt": playing}'></i>
 			</button>
 			<div class='z-50 text-left ml-8'>
 				<div class='text-3xl font-bold'>{{ sound.modifiedName }}</div>
@@ -70,6 +70,7 @@
 		},
 		computed: {
 			...mapState(useUserStore, ['loggedIn']),
+			...mapState(usePlayerStore, ['playing']),
 			sortedComments() {
 				const sortedComments = this.comments.slice().sort((a, b) => {
 					if (this.sort === 'newest') {
