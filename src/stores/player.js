@@ -12,6 +12,10 @@ const usePlayerStore = defineStore('player', {
 	}),
 	actions: {
 		async newSound(sound) {
+			if (this.audio instanceof Howl) {
+				this.audio.unload();
+			};
+
 			this.currentSound = sound;
 			this.audio = new Howl({
 				src: [sound.URL],
