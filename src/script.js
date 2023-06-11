@@ -18,7 +18,7 @@ authentication.onAuthStateChanged(() => {
 		application.use(router);
 		application.use(VeeValidatePlugIn);
 
-		application.directive('icon', IconDirective);
+        application.directive('icon', IconDirective);
 
 		application.mount('#root');	
 	};
