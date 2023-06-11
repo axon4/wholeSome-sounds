@@ -10,7 +10,7 @@
 				<i class='fa text-gray-500 text-xl' :class='{"fa-play": !playing, "fa-pause": playing}'></i>
 			</button>
 			<div class='player-current-time'>{{ seek }}</div>
-			<div class='w-full h-2 rounded bg-gray-200 relative cursor-pointer'>
+			<div class='w-full h-2 rounded bg-gray-200 relative cursor-pointer' @click='updateSeek'>
 				<span :style='{left: playerProgress}' class='absolute -top-2.5 -ml-2.5 text-gray-800 text-lg'>
 					<i class='fas fa-circle'></i>
 				</span>
@@ -28,7 +28,7 @@
 	export default {
 		name: 'Player',
 		methods: {
-			...mapActions(usePlayerStore, ['toggleAudio'])
+			...mapActions(usePlayerStore, ['toggleAudio', 'updateSeek'])
 		},
 		computed: {
 			...mapState(usePlayerStore, ['playing', 'seek', 'duration', 'playerProgress', 'currentSound'])

@@ -42,6 +42,17 @@ const usePlayerStore = defineStore('player', {
 			if (this.audio.playing()) {
 				requestAnimationFrame(this.progress);
 			};
+		},
+		updateSeek(event) {
+			if (this.audio.playing) {
+				const { x, width } = event.currentTarget.getBoundingClientRect();
+				const clickX = event.clientX - x;
+				const percentage = clickX / width;
+				const seconds = this.audio.duration() * percentage;
+
+				this.audio.seek(seconds);
+				this.audio.once('seek', this.progress);
+			};
 		}
 	},
 	getters: {
