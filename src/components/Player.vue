@@ -9,14 +9,14 @@
 			<button type='button' @click='toggleAudio'>
 				<i class='fa text-gray-500 text-xl' :class='{"fa-play": !playing, "fa-pause": playing}'></i>
 			</button>
-			<div class='player-current-time'>00:00</div>
+			<div class='player-current-time'>{{ seek }}</div>
 			<div class='w-full h-2 rounded bg-gray-200 relative cursor-pointer'>
 				<span style='left: 50%' class='absolute -top-2.5 -ml-2.5 text-gray-800 text-lg'>
 					<i class='fas fa-circle'></i>
 				</span>
 				<span style='width: 50%' class='block h-2 rounded bg-gradient-to-r from-green-500 to-green-400'></span>
 			</div>
-			<div class='player-duration'>07:19</div>
+			<div class='player-duration'>{{ duration }}</div>
 		</div>
 	</div>
 </template>
@@ -31,7 +31,7 @@
 			...mapActions(usePlayerStore, ['toggleAudio'])
 		},
 		computed: {
-			...mapState(usePlayerStore, ['playing'])
+			...mapState(usePlayerStore, ['playing', 'seek', 'duration'])
 		}
 	};
 </script>

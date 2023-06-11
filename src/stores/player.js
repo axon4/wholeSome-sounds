@@ -4,7 +4,9 @@ import { Howl } from 'howler';
 const usePlayerStore = defineStore('player', {
 	state: () => ({
 		currentSound: {},
-		audio: {}
+		audio: {},
+		seek: '00:00',
+		duration: '00:00'
 	}),
 	actions: {
 		async newSound(sound) {
@@ -15,10 +17,22 @@ const usePlayerStore = defineStore('player', {
 			});
 
 			this.audio.play();
+
+			this.audio.on('play', () => {
+				requestAnimationFrame(this.progress);
+			});
 		},
 		async toggleAudio() {
 			if (this.audio.playing) {
 				this.audio[this.audio.playing() ? 'pause' : 'play']();
+			};
+		},
+		progress() {
+			this.seek = this.audio.seek();
+			this.duration = this.audio.duration();
+
+			if (this.audio.playing()) {
+				requestAnimationFrame(this.progress);
 			};
 		}
 	},
