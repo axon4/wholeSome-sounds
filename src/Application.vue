@@ -1,7 +1,11 @@
 <template>
 	<Header />
-	<RouterView />
-    <Player />
+	<RouterView v-slot='{ Component: View }'>
+		<Transition name='fade' mode='out-in'>
+			<Component :is='View'></Component>
+		</Transition>
+	</RouterView>
+	<Player />
 	<AuthenticationModal />
 </template>
 
@@ -17,7 +21,7 @@
 		name: 'Application',
 		components: {
 			Header,
-            Player,
+			Player,
 			AuthenticationModal
 		},
 		computed: {
@@ -30,3 +34,18 @@
 		}
 	};
 </script>
+
+<style>
+	.fade-enter-from {
+		opacity: 0;
+	}
+
+	.fade-enter-active {
+		transition: all 0.5s linear;
+	}
+
+	.fade-leave-to {
+		transition: all 0.5s linear;
+		opacity: 0;
+	}
+</style>
