@@ -4,6 +4,9 @@
 			<RouterLink :to='{name: "home"}' class='text-white font-bold uppercase text-2xl mr-4' exact-active-class='inActive'>WholeSome Sounds</RouterLink>
 			<div class='flex items-center'>
 				<ul class='flex flex-row mt-1'>
+					<li>
+						<a href='#' class='px-2 text-white' @click.prevent='changeLocale'>{{ locale }}</a>
+					</li>
 					<template v-if='userStore.loggedIn'>
 						<li>
 							<RouterLink :to='{name: "manage"}' class='px-2 text-white'>Manage</RouterLink>
@@ -29,7 +32,10 @@
 	export default {
 		name: 'Header',
 		computed: {
-			...mapStores(useAuthenticationModalStore, useUserStore)
+			...mapStores(useAuthenticationModalStore, useUserStore),
+			locale() {
+				return this.$i18n.locale === 'ar' ? 'Arabic' : 'English';
+			}
 		},
 		methods: {
 			toggleAuthenticationModal() {					
@@ -41,6 +47,9 @@
 				if (this.$route.name === 'manage') {
 					this.$router.push('/');
 				};
+			},
+			changeLocale() {
+				this.$i18n.locale = this.$i18n.locale === 'ar' ? 'en' : 'ar';
 			}
 		}
 	};
