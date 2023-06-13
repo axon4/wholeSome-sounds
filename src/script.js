@@ -2,8 +2,9 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import Application from './Application.vue';
 import router from './router';
-import VeeValidatePlugIn from './includes/veeValidate';
 import { authentication } from './includes/fireBase';
+import i18n from './includes/i18n/i18n';
+import VeeValidatePlugIn from './includes/veeValidate';
 import IconDirective from './directives/icon';
 import './style/tailWind.css';
 import './style/style.css';
@@ -16,6 +17,7 @@ authentication.onAuthStateChanged(() => {
 
 		application.use(createPinia());
 		application.use(router);
+		application.use(i18n);
 		application.use(VeeValidatePlugIn);
 
         application.directive('icon', IconDirective);
