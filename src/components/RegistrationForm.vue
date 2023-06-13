@@ -42,7 +42,9 @@
 		</div>
 		<div class='mb-3 pl-6'>
 			<Field type='checkbox' name='termsAndConditions' value='1' class='w-4 h-4 float-left -ml-6 mt-1 rounded' />
-			<label class='inline-block'>Accept the Terms and Conditions</label>
+			<i18n-t class='inline-block' tag='label' keypath='registration_form.accept'>
+				<a href='#'>{{ $t('registration_form.terms_and_conditions') }}</a>
+			</i18n-t>
 			<ErrorMessage name='termsAndConditions' class='text-red-600 block' />
 		</div>
 		<button type='submit' class='block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700' :disabled='pending'>

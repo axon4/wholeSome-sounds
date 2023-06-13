@@ -1,1 +1,15 @@
-{}
+{
+	"home": {
+		"heading": "Listen to WholeSome Sounds!"
+	},
+	"registration_form": {
+		"accept": "Accept {0}",
+		"terms_and_conditions": "Terms and Conditions"
+	},
+	"manage": {
+		"my_sounds": "My Sounds"
+	},
+	"sound": {
+		"comment_count": "0 Comments | 1 Comment | {count} Comments"
+	}
+}

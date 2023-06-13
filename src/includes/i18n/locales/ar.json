@@ -1,1 +1,15 @@
-{}
+{
+	"home": {
+		"heading": "استمع إلى أصوات مفيدة!"
+	},
+	"registration_form": {
+		"accept": "أقبل {0}",
+		"terms_and_conditions": "الأحكام والشروط"
+	},
+	"manage": {
+		"my_sounds": "أصواتي"
+	},
+	"sound": {
+		"comment_count": "0 تعليقات | 1 تعليق | {count} تعليقات"
+	}
+}
