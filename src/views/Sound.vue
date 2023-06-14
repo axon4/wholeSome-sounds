@@ -86,21 +86,23 @@
 				return sortedComments;
 			}
 		},
-		async created() {
-			const snapShot = await soundsCollection.doc(this.$route.params.ID).get();
+		async beforeRouteEnter(to, from, next) {
+			const snapShot = await soundsCollection.doc(to.params.ID).get();
 
-			if (snapShot.exists) {
-				this.sound = snapShot.data();
-				this.getComments();
+			next(vm => {
+				if (snapShot.exists) {
+					vm.sound = snapShot.data();
+					vm.getComments();
 
-				const { sort } = this.$route.query;
+					const { sort } = vm.$route.query;
 
-				this.sort = sort === 'newest' || sort === 'oldest' ? sort : 'newest';
-			} else {
-				this.$router.push({name: 'home'});
+					vm.sort = sort === 'newest' || sort === 'oldest' ? sort : 'newest';
+				} else {
+					vm.$router.push({name: 'home'});
 
-				return;
-			}
+					return;
+				};
+			});
 		},
 		methods: {
 			async submit(values, { resetForm }) {
