@@ -18,6 +18,8 @@ export const authentication = fireBase.auth();
 
 const fireStore = fireBase.firestore();
 
+fireStore.enablePersistence().catch(console.error);
+
 export const usersCollection = fireStore.collection('users');
 export const soundsCollection = fireStore.collection('sounds');
 export const commentsCollection = fireStore.collection('comments');

@@ -38,7 +38,7 @@
 
 	export default {
 		name: 'upLoader',
-        props: ['addSound'],
+		props: ['addSound'],
 		data() {
 			return {
 				draggedOver: false,
@@ -55,12 +55,25 @@
 					if (file.type !== 'audio/mpeg') {
 						return;
 					};
+
+					if (!navigator.onLine) {
+						this.upLoads.push({
+							name: file.name,
+							task: {},
+							progress: 100, 
+							icon: 'fas fa-times',
+							textClass: 'text-red-400',
+							variant: 'bg-red-400'
+						});
+						
+						return;
+					};
 					
 					const storageReference = storage.ref();
 					const soundReference = storageReference.child(`sounds/${file.name}`);
 					
 					const task = soundReference.put(file);
-					const upLoadIndex = this.upLoads.push({ name: file.name, task, progress: 0, icon: 'fas fa-spin fa-spinner', textClass: '', variant: 'bg-blue-400' }) - 1;
+					const upLoadIndex = this.upLoads.push({name: file.name, task, progress: 0, icon: 'fas fa-spin fa-spinner', textClass: '', variant: 'bg-blue-400'}) - 1;
 					
 					task.on('state_changed', snapShot => {
 						const currentProgress = (snapShot.bytesTransferred / snapShot.totalBytes) * 100;
@@ -85,8 +98,8 @@
 						sound.URL = await task.snapshot.ref.getDownloadURL();
 
 						const soundReference = await soundsCollection.add(sound);
-                        const soundSnapShot = await soundReference.get();
-                        this.addSound(soundSnapShot);
+						const soundSnapShot = await soundReference.get();
+						this.addSound(soundSnapShot);
 						
 						this.upLoads[upLoadIndex].icon = 'fas fa-check';
 						this.upLoads[upLoadIndex].textClass = 'text-green-400';
