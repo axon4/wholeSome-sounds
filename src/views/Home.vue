@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<section class='mb-8 py-20 text-white text-center relative'>
-			<div style='background-image: url(images/header.png)' class='absolute inset-0 w-full h-full bg-contain introduction-background'></div>
+			<div style='background-image: url(/images/header.png)' class='absolute inset-0 w-full h-full bg-contain introduction-background'></div>
 			<div class='container mx-auto'>
 				<div class='text-white main-header-content'>
 					<h1 class='font-bold text-5xl mb-5'>{{ $t('home.heading') }}</h1>
@@ -13,7 +13,7 @@
 					</p>
 				</div>
 			</div>
-			<img src='images/hero.png' class='relative block mx-auto mt-5 -mb-20 w-auto max-w-full' />
+			<img src='/images/hero.png' class='relative block mx-auto mt-5 -mb-20 w-auto max-w-full' />
 		</section>
 		<section class='container mx-auto'>
 			<div class='bg-white rounded border border-gray-200 relative flex flex-col'>

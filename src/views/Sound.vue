@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<section class='w-full mb-8 py-14 text-center text-white relative'>
-			<div style='background-image: url(images/header2.png)' class='absolute inset-0 w-full h-full box-border bg-contain track-background'></div>
+			<div style='background-image: url(/images/header2.png)' class='absolute inset-0 w-full h-full box-border bg-contain track-background'></div>
 			<div class='container mx-auto flex items-center'>
 				<button type='button' class='z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none' @click='newSound(sound)'>
 					<i class='fas' :class='{"fa-play": !playing, "fa-sync-alt": playing}'></i>
