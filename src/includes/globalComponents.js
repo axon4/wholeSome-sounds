@@ -1,4 +1,8 @@
 import _ from 'lodash';
+// import upperFirst from 'lodash/upperFirst';
+// import camelCase from 'lodash/camelCase';
+
+// const _ = { upperFirst, camelCase };
 
 const GlobalComponentsPlugIn = {
 	install(application) {
