@@ -13,7 +13,7 @@
 					</p>
 				</div>
 			</div>
-			<img src='/images/hero.png' class='relative block mx-auto mt-5 -mb-20 w-auto max-w-full' />
+			<img src='/images/hero.png' class='relative block mx-auto mt-5 -mb-20 w-auto max-w-full pb-8' />
 		</section>
 		<section class='container mx-auto'>
 			<div class='bg-white rounded border border-gray-200 relative flex flex-col'>
