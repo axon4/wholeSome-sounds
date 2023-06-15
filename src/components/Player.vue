@@ -6,7 +6,7 @@
 			<span class='sound-author'>{{ currentSound.displayName }}</span>
 		</div>
 		<div class='flex flex-nowrap gap-4 items-center'>
-			<button type='button' @click='toggleAudio'>
+			<button id='button-play-small' type='button' @click='toggleAudio'>
 				<i class='fa text-gray-500 text-xl' :class='{"fa-play": !playing, "fa-pause": playing}'></i>
 			</button>
 			<div class='player-current-time'>{{ seek }}</div>
