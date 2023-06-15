@@ -1,51 +1,16 @@
-# wholesome-sounds
+# WholeSome Sounds
 
-This template should help get you started developing with Vue 3 in Vite.
+* Take a break from the degeneracy of this world and listen to some pleasant sounds.
+* Upload MP3 files to FireStore, and switch locales easily with I18Next.
+* Tested with ViTest and Cypress.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
+## Stack
+![HTML](https://img.shields.io/badge/-HTML-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/-CSS-1572B6?style=flat-square&logo=css3)
+![TailWind](https://img.shields.io/badge/-TailWind-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
+![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Vue](https://img.shields.io/badge/-Vue-4FC08D?style=flat-square&logo=vue.js&logoColor=white)
+![ViTest](https://img.shields.io/badge/-ViTest-729B1A?style=flat-square&logo=vitest&logoColor=white)
+![Cypress](https://img.shields.io/badge/-Cypress-007780?style=flat-square&logo=cypress)
+![I18Next](https://img.shields.io/badge/-I18Next-009788?style=flat-square&logo=i18next&logoColor=white)
+![FireBase](https://img.shields.io/badge/-FireBase-FFCA28?style=flat-square&logo=firebase&logoColor=black)
