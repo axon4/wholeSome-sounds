@@ -4,18 +4,18 @@
 			<RouterLink :to='{name: "home"}' class='text-white font-bold uppercase text-2xl mr-4' exact-active-class='inActive'>WholeSome Sounds</RouterLink>
 			<div class='flex items-center'>
 				<ul class='flex flex-row mt-1'>
-					<li>
+					<li class='flex items-center'>
 						<a href='#' class='px-2 text-white' @click.prevent='changeLocale'>{{ locale }}</a>
 					</li>
 					<template v-if='userStore.loggedIn'>
-						<li>
+						<li class='flex items-center'>
 							<RouterLink :to='{name: "manage"}' class='px-2 text-white'>Manage</RouterLink>
 						</li>
-						<li>
+						<li class='flex items-center'>
 							<a href='#' class='px-2 text-white' @click.prevent='logOut'>Log Out</a>
 						</li>
 					</template>
-					<li v-else>
+					<li class='flex items-center' v-else>
 						<a href='#' class='px-2 text-white' @click.prevent='toggleAuthenticationModal'>Log In / Register</a>
 					</li>
 				</ul>
