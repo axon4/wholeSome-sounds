@@ -12,7 +12,7 @@ const routes = [
 		name: 'manage',
 		path: '/manage',
 		// alias: '/management',
-		component: import('@/views/Manage.vue'),
+		component: () => import('@/views/Manage.vue'),
 		meta: {authenticationRequired: true}
 	},
 	{
