@@ -1,4 +1,4 @@
-import nProgress from "nprogress";
+import nProgress from 'nprogress';
 
 function NProgress(router) {
 	router.beforeEach((to, from, next) => {
