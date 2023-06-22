@@ -7,7 +7,7 @@
 			<!-- trick the browser into centreing the modal contents -->
 			<span class='hidden sm:inline-block sm:align-middle sm:h-screen'>&#8203;</span>
 			<div class='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full'>
-				<!-- margin to see some of the overlay behind the modal-->
+				<!-- margin to see some of the overlay behind the modal -->
 				<div class='py-4 text-left px-6'>
 					<div class='flex justify-between items-center pb-4'>
 						<p class='text-2xl font-bold'>Account</p>
