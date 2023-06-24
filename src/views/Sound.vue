@@ -119,14 +119,20 @@
 					value: values.comment
 				};
 
-				await commentsCollection.add(comment);
-				this.sound.commentCount++;
-				await soundsCollection.doc(this.$route.params.ID).update({commentCount: this.sound.commentCount});
-				this.getComments();
+				try {
+					await commentsCollection.add(comment);
+					this.sound.commentCount++;
+					await soundsCollection.doc(this.$route.params.ID).update({commentCount: this.sound.commentCount});
+					this.getComments();
 
-				this.pending = false;
-				this.bannerVariant = 'bg-green-500';
-				this.bannerMessage = 'Comment Successful';
+					this.pending = false;
+					this.bannerVariant = 'bg-green-500';
+					this.bannerMessage = 'Comment Successful';
+				} catch (error) {
+					this.pending = false;
+					this.bannerVariant = 'bg-red-500';
+					this.bannerMessage = 'Error Commenting';
+				};
 
 				resetForm();
 			},
