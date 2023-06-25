@@ -34,8 +34,7 @@ const VeeValidatePlugIn = {
 					not_one_of: 'registrants from this location are not permitted',
 					termsAndConditions: 'Terms and Conditions Must be Accepted'
 				};
-
-				const message = messages[context.rule.name] ?? `'${context.field}' is invalid`;
+				const message = messages[context.rule.name] ?? `'${context.field}' is inValid`;
 
 				return message;
 			}
