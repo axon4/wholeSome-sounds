@@ -40,8 +40,8 @@
 		methods: {
 			...mapActions(useUserStore, ['logIn']),
 			async submit(values) {
-				this.showBanner = true;
 				this.pending = true;
+				this.showBanner = true;
 				this.bannerVariant = 'bg-blue-500';
 				this.bannerMessage = 'Log In in Progress';
 				

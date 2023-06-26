@@ -82,8 +82,8 @@
 		methods: {
 			...mapActions(useUserStore, {register: 'createUser'}),
 			async submit(values) {
-				this.showBanner = true;
 				this.pending = true;
+				this.showBanner = true;
 				this.bannerVariant = 'bg-blue-500';
 				this.bannerMessage = 'Registration in Progress';
 
