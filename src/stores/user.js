@@ -5,11 +5,11 @@ const useUserStore = defineStore('user', {
 	state: () => ({loggedIn: false}),
 	actions: {
 		async createUser({ name, age, eMail, passWord, country }) {
-			const userCredential = await authentication.createUserWithEmailAndPassword(eMail, passWord);
+			const credentials = await authentication.createUserWithEmailAndPassword(eMail, passWord);
 			await usersCollection
-				.doc(userCredential.user.uid)
+				.doc(credentials.user.uid)
 				.set({ name, age, eMail, country });
-			await userCredential.user.updateProfile({displayName: name});
+			await credentials.user.updateProfile({displayName: name});
 
 			this.loggedIn = true;
 		},
