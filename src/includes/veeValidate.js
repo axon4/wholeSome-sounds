@@ -25,12 +25,12 @@ const VeeValidatePlugIn = {
 					required: `'${context.field}' is required`,
 					min: `'${context.field}' is too short`,
 					max: `'${context.field}' is too long`,
-					alpha_dash: `'${context.field}' may only contain alphanumerics/dashes/underscores`,
+					alpha_dash: `'${context.field}' may only contain alphaNumerics/dashes/underScores`,
 					alpha_spaces: `'${context.field}' may only contain alphabetics/spaces`,
-					eMail: `'${context.field}' is an invalid eMail`,
+					eMail: `'${context.field}' is an inValid eMail`,
 					min_value: `'${context.field}' is too low`,
                     max_value: `'${context.field}' is too high`,
-					confirmed: 'the passwords misMatch',
+					confirmed: 'the passWords misMatch',
 					not_one_of: 'registrants from this location are not permitted',
 					termsAndConditions: 'Terms and Conditions Must be Accepted'
 				};
