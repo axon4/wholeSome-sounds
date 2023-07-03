@@ -41,8 +41,12 @@
 			toggleAuthenticationModal() {					
 				this.authenticationModalStore.isOpen = true;
 			},
-			logOut() {
-				this.userStore.logOut();
+			async logOut() {
+				try {
+					this.userStore.logOut();
+				} catch (error) {
+					console.error(error);
+				};
 								
 				if (this.$route.name === 'manage') {
 					this.$router.push('/');
