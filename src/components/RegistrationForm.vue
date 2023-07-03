@@ -40,9 +40,9 @@
 			</Field>
 			<ErrorMessage name='country' class='text-red-600' />
 		</div>
-		<div class='mb-3 pl-6'>
-			<Field type='checkbox' name='termsAndConditions' value='1' class='w-4 h-4 float-left -ml-6 mt-1 rounded' />
-			<i18n-t class='inline-block' tag='label' keypath='registration_form.accept'>
+		<div class='mb-3'>
+			<Field type='checkbox' name='termsAndConditions' value='1' class='w-4 h-4 float-left mt-1 rounded pr-4' />
+			<i18n-t class='inline-block pl-2' tag='label' keypath='registration_form.accept'>
 				<a href='#'>{{ $t('registration_form.terms_and_conditions') }}</a>
 			</i18n-t>
 			<ErrorMessage name='termsAndConditions' class='text-red-600 block' />

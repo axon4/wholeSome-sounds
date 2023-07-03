@@ -30,9 +30,9 @@ const VeeValidatePlugIn = {
 					eMail: `'${context.field}' is an inValid eMail`,
 					min_value: `'${context.field}' is too low`,
                     max_value: `'${context.field}' is too high`,
-					confirmed: 'the passWords misMatch',
-					not_one_of: 'registrants from this location are not permitted',
-					termsAndConditions: 'Terms and Conditions Must be Accepted'
+					confirmed: `'${context.field}' misMatch`,
+					not_one_of: `registrants from this '${context.field}' are not permitted`,
+					termsAndConditions: `'${context.field}' must be accepted`
 				};
 				const message = messages[context.rule.name] ?? `'${context.field}' is inValid`;
 
