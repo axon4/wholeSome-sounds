@@ -16,7 +16,7 @@
 				@dragend.prevent.stop='draggedOver = false'
 				@drop.prevent.stop='upLoad'
 			>
-				<h5>Drop Files</h5>
+				<h5>Drop Files (MP3)</h5>
 			</div>
 			<input type='file' multiple @change='upLoad' />
 			<hr class='my-6' />
