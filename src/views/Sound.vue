@@ -96,7 +96,7 @@
 
 					const { sort } = vm.$route.query;
 
-					vm.sort = sort === 'newest' || sort === 'oldest' ? sort : 'newest';
+					vm.sort = (sort === 'newest' || sort === 'oldest') ? sort : 'newest';
 				} else {
 					vm.$router.push({name: 'home'});
 
