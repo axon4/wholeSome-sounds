@@ -52,9 +52,7 @@
 				const { files } = $event.dataTransfer ?? $event.target;
 				
 				Object.values(files).forEach(file => {
-					if (file.type !== 'audio/mpeg') {
-						return;
-					};
+					if (file.type !== 'audio/mpeg') return;
 
 					if (!navigator.onLine) {
 						this.upLoads.push({
