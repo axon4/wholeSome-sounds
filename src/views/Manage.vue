@@ -68,7 +68,7 @@
 				this.sounds.splice(index, 1);
 			},
 			addSound(document) {
-				const sound = {...document.data(), documentID: document.id};
+				const sound = {documentID: document.id, ...document.data()};
 				
 				this.sounds.push(sound);
 			},
