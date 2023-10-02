@@ -41,7 +41,7 @@
 			<li class='p-6 bg-gray-50 border border-gray-200' v-for='comment in sortedComments' :key='comment.documentID'>
 				<div class='mb-5'>
 					<div class='font-bold'>{{ comment.commenter }}</div>
-					<time>{{ comment.date }}</time>
+					<time>{{ formatDate(new Date(comment.date)) }}</time>
 				</div>
 				<p>{{ comment.value }}</p>
 			</li>
@@ -144,6 +144,28 @@
 				snapShots.forEach(document => {
 					this.comments.push({documentID: document.id, ...document.data()});
 				});
+			},
+			formatDate(date) {
+				const formattedDate = new Intl
+					.DateTimeFormat('en-GB', {
+						timeZoneName: 'short',
+						year: 'numeric',
+						month: '2-digit',
+						day: '2-digit',
+						hour: '2-digit',
+						minute: '2-digit',
+						second: '2-digit'
+					})
+					.format(date)
+					.replace(',', '');
+				const offSet = date.getTimezoneOffset();
+				const offSetHours = Math.abs(Math.floor(offSet / 60)).toString().padStart(2, '0');
+				const offSetMinutes = (Math.abs(offSet) % 60).toString().padStart(2, '0');
+				const offSetSign = offSet > 0 ? '-' : '+';
+				const timeZoneName = new Intl.DateTimeFormat('en-GB', {timeZoneName: 'long'}).formatToParts(date).find(part => part.type === 'timeZoneName').value;
+				const finalDate = `${formattedDate} ${offSetSign}${offSetHours}${offSetMinutes} (${timeZoneName})`;
+
+				return finalDate;
 			},
 			...mapActions(usePlayerStore, ['newSound'])
 		},
