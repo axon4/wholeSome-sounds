@@ -1,4 +1,4 @@
-import firebase from 'firebase/compat/app';
+import FireBase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
@@ -12,7 +12,7 @@ const configuration = {
 	messagingSenderId: '75512933610'
 };
 
-const fireBase = firebase.initializeApp(configuration);
+const fireBase = FireBase.initializeApp(configuration);
 
 export const authentication = fireBase.auth();
 

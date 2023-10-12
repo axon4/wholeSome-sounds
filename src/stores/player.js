@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { Howl } from 'howler';
-import formatTime from '@/utility/formatTime';
+import forMatTime from '@/utility/forMatTime';
 
 const usePlayerStore = defineStore('player', {
 	state: () => ({
@@ -34,8 +34,8 @@ const usePlayerStore = defineStore('player', {
 			};
 		},
 		progress() {
-			this.seek = formatTime(this.audio.seek());
-			this.duration = formatTime(this.audio.duration());
+			this.seek = forMatTime(this.audio.seek());
+			this.duration = forMatTime(this.audio.duration());
 
 			this.playerProgress = `${(this.audio.seek() / this.audio.duration()) * 100}%`;
 
@@ -43,7 +43,7 @@ const usePlayerStore = defineStore('player', {
 				requestAnimationFrame(this.progress);
 			};
 		},
-		updateSeek(event) {
+		upDateSeek(event) {
 			if (this.audio.playing) {
 				const { x, width } = event.currentTarget.getBoundingClientRect();
 				const clickX = event.clientX - x;

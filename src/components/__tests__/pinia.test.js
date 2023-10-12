@@ -7,12 +7,12 @@ vi.mock('@/includes/fireBase', () => ({
 	}
 }));
 
-describe('user store', () => {
+describe('user-store', () => {
 	beforeEach(() => {
 		setActivePinia(createPinia());
 	});
 
-	it('log in user', async () => {
+	it('log-in user', async () => {
 		const userStore = useUserStore();
 
 		expect(userStore.loggedIn).toBe(false);

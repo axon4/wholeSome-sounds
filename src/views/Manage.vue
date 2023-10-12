@@ -8,10 +8,10 @@
 				<div class='bg-white rounded border border-gray-200 relative flex flex-col'>
 					<div class='px-6 pt-6 pb-5 font-bold border-b border-gray-200'>
 						<span class='card-title'>{{ $t('manage.my_sounds') }}</span>
-						<i class='fa fa-compact-disc float-right text-green-400 text-2xl'></i>
+						<i class='fa fa-compact-disc float-right text-green-400 text-2xl' />
 					</div>
 					<div class='p-6'>
-						<CompositionItem v-for='(sound, index) in sounds' :key='sound.documentID' :index='index' :sound='sound' :updateSound='updateSound' :removeSound='removeSound' :updateUnSavedChangesFlag='updateUnSavedChangesFlag' />
+						<CompositionItem v-for='(sound, index) in sounds' :key='sound.documentID' :index='index' :sound='sound' :upDateSound='upDateSound' :reMoveSound='reMoveSound' :upDateUnSavedChangesFlag='upDateUnSavedChangesFlag' />
 					</div>
 				</div>
 			</div>
@@ -25,7 +25,7 @@
 	import CompositionItem from '@/components/CompositionItem.vue';
 
 	export default {
-		name: 'manage',
+		name: 'Manage',
 		components: { UpLoader, CompositionItem },
 		data() {
 			return {
@@ -35,14 +35,14 @@
 		},
 		async created() {
 			const snapShot = await soundsCollection.where('uID', '==', authentication.currentUser.uid).get();
-			
+
 			snapShot.forEach(this.addSound);
 		},
 		beforeRouteLeave(to, from, next) {
 			if (!this.unSavedChangesFlag) {
 				next();
 			} else {
-				const leave = confirm('You Have UnSaved Changes. Do You Want To Leave This Page?');
+				const leave = confirm('You Have UnSaved Changes; Do You Want To Leave This Page?');
 
 				next(leave);
 			};
@@ -56,23 +56,23 @@
 		// },
 		// beforeRouteLeave(to, from, next) {
 		// 	this.$refs.upLoader.cancelUpLoads();
-						
+
 		// 	next();
 		// }
 		methods: {
-			updateSound(index, values) {
+			upDateSound(index, values) {
 				this.sounds[index].modifiedName = values.modifiedName;
 				this.sounds[index].genre = values.genre;
 			},
-			removeSound(index) {
+			reMoveSound(index) {
 				this.sounds.splice(index, 1);
 			},
 			addSound(document) {
 				const sound = {documentID: document.id, ...document.data()};
-				
+
 				this.sounds.push(sound);
 			},
-			updateUnSavedChangesFlag(boolean) {
+			upDateUnSavedChangesFlag(boolean) {
 				this.unSavedChangesFlag = boolean;
 			}
 		}

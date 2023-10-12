@@ -36,11 +36,11 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 	if (!to.meta.authenticationRequired) {
 		next();
-		
+
 		return;
 	} else {
 		const userStore = useUserStore();
-		
+
 		if (userStore.loggedIn) {
 			next();
 		} else {

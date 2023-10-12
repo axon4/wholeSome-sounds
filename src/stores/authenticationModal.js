@@ -4,7 +4,7 @@ const useAuthenticationModalStore = defineStore('authenticationModal', {
 	state: () => ({isOpen: false}),
 	getters: {
 		hiddenClass(state) {
-			return state.isOpen ? '' : 'hidden'
+			return state.isOpen ? '' : 'hidden';
 		}
 	}
 });

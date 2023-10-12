@@ -28,6 +28,6 @@ authentication.onAuthStateChanged(() => {
 
 		application.directive('icon', IconDirective);
 
-		application.mount('#root');	
+		application.mount('#root');
 	};
 });

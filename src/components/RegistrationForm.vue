@@ -76,7 +76,7 @@
 				pending: false,
 				showBanner: false,
 				bannerVariant: 'bg-blue-500',
-				bannerMessage: 'Registration in Progress'
+				bannerMessage: 'Registration in-Progress'
 			}
 		},
 		methods: {
@@ -85,7 +85,7 @@
 				this.pending = true;
 				this.showBanner = true;
 				this.bannerVariant = 'bg-blue-500';
-				this.bannerMessage = 'Registration in Progress';
+				this.bannerMessage = 'Registration in-Progress';
 
 				try {
 					await this.register(values);

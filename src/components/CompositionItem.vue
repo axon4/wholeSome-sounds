@@ -3,10 +3,10 @@
 		<div v-show='!formVisible'>
 			<h4 class='inline-block text-2xl font-bold'>{{ sound.modifiedName }}</h4>
 			<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right' @click='deleteSound'>
-				<i class='fa fa-times'></i>
+				<i class='fa fa-times' />
 			</button>
 			<button class='ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right' @click='formVisible = !formVisible'>
-				<i class='fa fa-pencil-alt'></i>
+				<i class='fa fa-pencil-alt' />
 			</button>
 		</div>
 		<div v-show='formVisible'>
@@ -15,13 +15,13 @@
 			</div>
 			<Form :validation-schema='schema' :initial-values='sound' @submit='submit'>
 				<div class='mb-3'>
-					<label class='inline-block mb-2'>Sound Title</label>
-					<Field name='modifiedName' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='title' @input='this.updateUnSavedChangesFlag(true)' />
+					<label class='inline-block mb-2'>Title</label>
+					<Field name='modifiedName' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='title' @input='this.upDateUnSavedChangesFlag(true)' />
 					<ErrorMessage name='modifiedName' class='text-red-600' />
 				</div>
 				<div class='mb-3'>
 					<label class='inline-block mb-2'>Genre</label>
-					<Field name='genre' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='genre' @input='this.updateUnSavedChangesFlag(true)' />
+					<Field name='genre' type='text' class='block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded' placeholder='genre' @input='this.upDateUnSavedChangesFlag(true)' />
 					<ErrorMessage name='genre' class='text-red-600' />
 				</div>
 				<button type='submit' class='py-1.5 px-3 rounded text-white bg-green-600' :disabled='pending'>
@@ -43,9 +43,9 @@
 		props: {
 			index: {type: Number, required: true},
 			sound: {type: Object, required: true},
-			updateSound: {type: Function, required: true},
-			removeSound: {type: Function, required: true},
-			updateUnSavedChangesFlag: {type: Function},
+			upDateSound: {type: Function, required: true},
+			reMoveSound: {type: Function, required: true},
+			upDateUnSavedChangesFlag: {type: Function},
 		},
 		data() {
 			return {
@@ -57,7 +57,7 @@
 				pending: false,
 				showAlert: false,
 				alertVariant: 'bg-blue-500',
-				alertMessage: 'Updating Sound MetaData'
+				alertMessage: 'UpDating Sound-MetaData'
 			};
 		},
 		methods: {
@@ -65,20 +65,20 @@
 				this.pending = true;
 				this.showAlert = true;
 				this.alertVariant = 'bg-blue-500';
-				this.alertMessage = 'Updating Sound MetaData';
-				
+				this.alertMessage = 'UpDating Sound-MetaData';
+
 				try {
 					await soundsCollection.doc(this.sound.documentID).update(values);
-					this.updateSound(this.index, values);
-                    this.updateUnSavedChangesFlag(false);
-					
+					this.upDateSound(this.index, values);
+					this.upDateUnSavedChangesFlag(false);
+
 					this.pending = false;
 					this.alertVariant = 'bg-green-500';
-					this.alertMessage = 'Updating Sound MetaData Successful';
+					this.alertMessage = 'UpDating Sound-MetaData Successful';
 				} catch (error) {
 					this.pending = false;
 					this.alertVariant = 'bg-red-500';
-					this.alertMessage = 'Error Updating Sound MetaData';
+					this.alertMessage = 'Error UpDating Sound-MetaData';
 				};
 			},
 			async deleteSound() {
@@ -97,7 +97,7 @@
 					console.error(error);
 				};
 
-				this.removeSound(this.index);
+				this.reMoveSound(this.index);
 			}
 		}
 	};

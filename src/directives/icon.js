@@ -1,5 +1,5 @@
 const IconDirective = {
-	beforeMount(el, binding) {
+	beforeMount(element, binding) {
 		let iconClass = `fa fa-${binding.value} text-xl`;
 
 		if (binding.arg === 'full') {
@@ -16,7 +16,7 @@ const IconDirective = {
 			iconClass += ' text-green-400';
 		};
 
-		el.innerHTML += `<i class='${iconClass}'></i>`;
+		element.innerHTML += `<i class='${iconClass}'></i>`;
 	}
 };
 

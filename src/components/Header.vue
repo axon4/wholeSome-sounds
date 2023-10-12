@@ -12,11 +12,11 @@
 							<RouterLink :to='{name: "manage"}' class='px-2 text-white'>Manage</RouterLink>
 						</li>
 						<li class='flex items-center'>
-							<a href='#' class='px-2 text-white' @click.prevent='logOut'>Log Out</a>
+							<a href='#' class='px-2 text-white' @click.prevent='logOut'>Log-Out</a>
 						</li>
 					</template>
 					<li class='flex items-center' v-else>
-						<a href='#' class='px-2 text-white' @click.prevent='toggleAuthenticationModal'>Log In / Register</a>
+						<a href='#' class='px-2 text-white' @click.prevent='toggleAuthenticationModal'>Log-In/Register</a>
 					</li>
 				</ul>
 			</div>
@@ -38,7 +38,7 @@
 			}
 		},
 		methods: {
-			toggleAuthenticationModal() {					
+			toggleAuthenticationModal() {
 				this.authenticationModalStore.isOpen = true;
 			},
 			async logOut() {
@@ -47,7 +47,7 @@
 				} catch (error) {
 					console.error(error);
 				};
-								
+
 				if (this.$route.name === 'manage') {
 					this.$router.push('/');
 				};

@@ -34,7 +34,7 @@
 				pending: false,
 				showBanner: false,
 				bannerVariant: 'bg-blue-500',
-				bannerMessage: 'Log In in Progress'
+				bannerMessage: 'Log-In in-Progress'
 			}
 		},
 		methods: {
@@ -43,19 +43,19 @@
 				this.pending = true;
 				this.showBanner = true;
 				this.bannerVariant = 'bg-blue-500';
-				this.bannerMessage = 'Log In in Progress';
-				
+				this.bannerMessage = 'Log-In in-Progress';
+
 				try {
 					await this.logIn(values);
-					
+
 					this.bannerVariant = 'bg-green-500';
-					this.bannerMessage = 'Log In Successful';
-					
+					this.bannerMessage = 'Log-In Successful';
+
 					setTimeout(() => {window.location.reload()}, 1000);
 				} catch (error) {
 					this.pending = false;
 					this.bannerVariant = 'bg-red-500';
-					this.bannerMessage = 'Error Logging In';
+					this.bannerMessage = 'Error Logging-In';
 				};
 			}
 		}

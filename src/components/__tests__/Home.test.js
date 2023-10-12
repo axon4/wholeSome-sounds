@@ -19,7 +19,7 @@ describe('Home', () => {
 		expect(soundItems).toHaveLength(sounds.length);
 
 		soundItems.forEach((soundItem, index) => {
-			expect(soundItem.props().sound).toStrictEqual(sounds[i]);
+			expect(soundItem.props().sound).toStrictEqual(sounds[index]);
 		});
 	});
 });

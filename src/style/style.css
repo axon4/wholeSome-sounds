@@ -13,8 +13,7 @@ a:hover {
 	fill: #F59E0B !important;
 }
 
-.card-header .fa.text-orange,
-.card .card-header .fas.text-orange {
+.card-header .fa.text-orange, .card .card-header .fas.text-orange {
 	color: #FF5E3A;
 	fill: #FF5E3A;
 }

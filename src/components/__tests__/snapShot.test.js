@@ -9,7 +9,6 @@ describe('snapShot', () => {
 			modifiedName: 'testModifiedName',
 			commentCount: 7
 		};
-
 		const wrapper = shallowMount(SoundItem, {
 			propsData: { sound },
 			global: {

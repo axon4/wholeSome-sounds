@@ -1,12 +1,12 @@
 const Icon2Directive = {
-	beforeMount(el, binding) {
+	beforeMount(element, binding) {
 		let iconClass = `fa fa-${binding.value.icon} text-green-400 text-xl`;
 
 		if (binding.value.right) {
 			iconClass += ' float-right';
 		};
 
-		el.innerHTML += `<i class='${iconClass}'></i>`;
+		element.innerHTML += `<i class='${iconClass}'></i>`;
 	}
 };
 

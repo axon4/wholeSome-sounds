@@ -1,10 +1,11 @@
 # WholeSome Sounds
 
-* Take a break from the degeneracy of this world and listen to some pleasant sounds.
-* UpLoad MP3 files to FireStore, and switch locales easily with I18Next.
-* Tested with ViTest and Cypress.
+* take a break from the degeneracy of this world and listen to some pleasant sounds
+* upLoad MP3-files to FireStore and switch locales easily with I18Next
+* tested with ViTest and Cypress
 
 ## Stack
+
 ![HTML](https://img.shields.io/badge/-HTML-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/-CSS-1572B6?style=flat-square&logo=css3)
 ![TailWind](https://img.shields.io/badge/-TailWind-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)

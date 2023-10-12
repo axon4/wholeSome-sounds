@@ -1,10 +1,10 @@
 <template>
 	<main>
 		<section class='w-full mb-8 py-14 text-center text-white relative'>
-			<div style='background-image: url(/images/header2.png)' class='absolute inset-0 w-full h-full box-border bg-contain track-background'></div>
+			<div style='background-image: url("/images/header2.png")' class='absolute inset-0 w-full h-full box-border bg-contain track-background' />
 			<div class='container mx-auto flex items-center'>
 				<button id='button-play-big' type='button' class='z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none ml-4' @click='newSound(sound)'>
-					<i class='fas' :class='{"fa-play": !playing, "fa-sync-alt": playing}'></i>
+					<i class='fas' :class='{"fa-play": !playing, "fa-sync-alt": playing}' />
 				</button>
 				<div class='z-50 text-left ml-8'>
 					<div class='text-3xl font-bold'>{{ sound.modifiedName }}</div>
@@ -17,7 +17,7 @@
 			<div class='bg-white rounded border border-gray-200 relative flex flex-col'>
 				<div class='px-6 pt-6 pb-5 font-bold border-b border-gray-200'>
 					<span class='card-title'>{{ $tc('sound.comment_count', sound.commentCount, {count: sound.commentCount}) }}</span>
-					<i class='fa fa-comments float-right text-green-400 text-2xl'></i>
+					<i class='fa fa-comments float-right text-green-400 text-2xl' />
 				</div>
 				<div class='p-6'>
 					<div class='text-white text-center font-bold p-4 mb-4' :class='bannerVariant' v-if='showBanner'>
@@ -41,7 +41,7 @@
 			<li class='p-6 bg-gray-50 border border-gray-200' v-for='comment in sortedComments' :key='comment.documentID'>
 				<div class='mb-5'>
 					<div class='font-bold'>{{ comment.commenter }}</div>
-					<time>{{ formatDate(new Date(comment.date)) }}</time>
+					<time>{{ forMatDate(new Date(comment.date)) }}</time>
 				</div>
 				<p>{{ comment.value }}</p>
 			</li>
@@ -145,8 +145,8 @@
 					this.comments.push({documentID: document.id, ...document.data()});
 				});
 			},
-			formatDate(date) {
-				const formattedDate = new Intl
+			forMatDate(date) {
+				const forMattedDate = new Intl
 					.DateTimeFormat('en-GB', {
 						timeZoneName: 'short',
 						year: 'numeric',
@@ -163,7 +163,7 @@
 				const offSetMinutes = (Math.abs(offSet) % 60).toString().padStart(2, '0');
 				const offSetSign = offSet > 0 ? '-' : '+';
 				const timeZoneName = new Intl.DateTimeFormat('en-GB', {timeZoneName: 'long'}).formatToParts(date).find(part => part.type === 'timeZoneName').value;
-				const finalDate = `${formattedDate} ${offSetSign}${offSetHours}${offSetMinutes} (${timeZoneName})`;
+				const finalDate = `${forMattedDate} ${offSetSign}${offSetHours}${offSetMinutes} (${timeZoneName})`;
 
 				return finalDate;
 			},

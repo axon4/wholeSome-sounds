@@ -29,7 +29,7 @@ const VeeValidatePlugIn = {
 					alpha_spaces: `'${context.field}' may only contain alphabetics/spaces`,
 					eMail: `'${context.field}' is an inValid eMail`,
 					min_value: `'${context.field}' is too low`,
-                    max_value: `'${context.field}' is too high`,
+					max_value: `'${context.field}' is too high`,
 					confirmed: `'${context.field}' misMatch`,
 					not_one_of: `registrants from this '${context.field}' are not permitted`,
 					termsAndConditions: `'${context.field}' must be accepted`

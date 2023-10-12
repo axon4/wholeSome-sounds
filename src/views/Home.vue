@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<section class='mb-8 py-20 text-white text-center relative'>
-			<div style='background-image: url(/images/header.png)' class='absolute inset-0 w-full h-full bg-contain introduction-background'></div>
+			<div style='background-image: url("/images/header.png")' class='absolute inset-0 w-full h-full bg-contain introduction-background' />
 			<div class='container mx-auto'>
 				<div class='text-white main-header-content'>
 					<h1 class='font-bold text-5xl mb-5'>{{ $t('home.heading') }}</h1>
@@ -43,7 +43,7 @@
 		},
 		async created() {
 			this.getSounds();
-			
+
 			window.addEventListener('scroll', this.handleScroll);
 		},
 		methods: {

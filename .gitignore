@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# build
 node_modules
 .DS_Store
 dist
@@ -15,10 +16,11 @@ dev-dist
 coverage
 *.local
 
-/cypress/videos/
-/cypress/screenshots/
+# Cypress
+cypress/videos/
+cypress/screenshots/
 
-# editor directories and files
+# editor directories & files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -28,5 +30,5 @@ coverage
 *.sln
 *.sw?
 
-# RollUp Visualiser statistics
+# RollUp-Visualiser--statistics
 stats.html

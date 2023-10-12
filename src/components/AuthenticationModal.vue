@@ -2,12 +2,12 @@
 	<div id='modal' class='fixed z-50 inset-0 overflow-y-auto' :class='hiddenClass'>
 		<div class='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
 			<div class='fixed inset-0 transition-opacity'>
-				<div class='absolute inset-0 bg-gray-800 opacity-75'></div>
+				<div class='absolute inset-0 bg-gray-800 opacity-75' />
 			</div>
-			<!-- trick the browser into centreing the modal contents -->
+			<!-- trick browser inTo centreing modal-conTents -->
 			<span class='hidden sm:inline-block sm:align-middle sm:h-screen'>&#8203;</span>
 			<div class='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full'>
-				<!-- margin to see some of the overlay behind the modal -->
+				<!-- margin to see some of overLay beHind modal -->
 				<div class='py-4 text-left px-6'>
 					<div class='flex justify-between items-center pb-4'>
 						<p class='text-2xl font-bold'>Account</p>
@@ -17,22 +17,12 @@
 					</div>
 					<ul class='flex flex-wrap mb-4'>
 						<li class='flex-auto text-center'>
-							<a
-								href='#'
-								class='block rounded py-3 px-4 transition'
-								:class='{"hover:text-white text-white bg-blue-600": tab === "logIn", "hover:text-blue-600": tab === "registration"}'
-								@click.prevent='tab = "logIn"'
-							>
-								Log In
+							<a href='#' class='block rounded py-3 px-4 transition' :class='{"hover:text-white text-white bg-blue-600": tab === "logIn", "hover:text-blue-600": tab === "registration"}' @click.prevent='tab = "logIn"'>
+								Log-In
 							</a>
 						</li>
 						<li class='flex-auto text-center'>
-							<a
-								href='#'
-								class='block rounded py-3 px-4 transition'
-								:class='{"hover:text-white text-white bg-blue-600": tab === "registration", "hover:text-blue-600": tab === "logIn"}'
-								@click.prevent='tab = "registration"'
-							>
+							<a href='#' class='block rounded py-3 px-4 transition' :class='{"hover:text-white text-white bg-blue-600": tab === "registration", "hover:text-blue-600": tab === "logIn"}' @click.prevent='tab = "registration"'>
 								Register
 							</a>
 						</li>
@@ -66,5 +56,5 @@
 			LogInForm,
 			RegistrationForm
 		}
-};
+	};
 </script>
