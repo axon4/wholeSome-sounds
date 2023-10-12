@@ -1,7 +1,7 @@
 # WholeSome Sounds
 
 * Take a break from the degeneracy of this world and listen to some pleasant sounds.
-* Upload MP3 files to FireStore, and switch locales easily with I18Next.
+* UpLoad MP3 files to FireStore, and switch locales easily with I18Next.
 * Tested with ViTest and Cypress.
 
 ## Stack
